@@ -1,6 +1,7 @@
 require 'menu'
 
 
+module Goldberg
 class MenuItemsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -182,4 +183,5 @@ class MenuItemsController < ApplicationController
     @pages.unshift ContentPage.new(:id => nil, :name => '(none)')
   end
 
+end
 end

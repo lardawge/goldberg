@@ -1,3 +1,4 @@
+module Goldberg
 class UsersController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -88,4 +89,5 @@ class UsersController < ApplicationController
     @all_roles = Role.find(:all, :order => 'name')
   end
 
+end
 end

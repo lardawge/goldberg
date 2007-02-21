@@ -1,3 +1,4 @@
+module Goldberg
 class RolesController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -79,4 +80,5 @@ class RolesController < ApplicationController
                        :order => 'name')
   end
     
+end
 end

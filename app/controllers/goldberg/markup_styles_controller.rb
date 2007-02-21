@@ -1,3 +1,4 @@
+module Goldberg
 class MarkupStylesController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -50,4 +51,5 @@ class MarkupStylesController < ApplicationController
     redirect_to :action => 'list'
   end
 
+end
 end

@@ -1,3 +1,4 @@
+module Goldberg
 class SystemSettingsController < ApplicationController
   def index
     list
@@ -70,4 +71,5 @@ class SystemSettingsController < ApplicationController
     @markup_styles.unshift MarkupStyle.new(:id => nil, :name => '(none)')
   end
 
+end
 end

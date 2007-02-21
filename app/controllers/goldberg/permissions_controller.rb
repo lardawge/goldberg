@@ -1,3 +1,4 @@
+module Goldberg
 class PermissionsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -54,4 +55,5 @@ class PermissionsController < ApplicationController
     Role.rebuild_cache
     redirect_to :action => 'list'
   end
+end
 end

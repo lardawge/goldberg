@@ -1,3 +1,4 @@
+module Goldberg
 class SiteControllersController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -152,3 +153,4 @@ class SiteControllersController < ApplicationController
   end  # def controller_actions
 
 end  # class
+end

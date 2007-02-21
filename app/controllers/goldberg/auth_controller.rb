@@ -1,3 +1,4 @@
+module Goldberg
 class AuthController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -130,4 +131,5 @@ class AuthController < ApplicationController
     session[:clear] = true
   end
 
+end
 end

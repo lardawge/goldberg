@@ -1,3 +1,4 @@
+module Goldberg
 class ControllerActionsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -130,4 +131,5 @@ class ControllerActionsController < ApplicationController
     return action_collection
   end
     
+end
 end

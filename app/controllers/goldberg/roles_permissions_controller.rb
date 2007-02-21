@@ -1,3 +1,4 @@
+module Goldberg
 class RolesPermissionsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -59,4 +60,5 @@ class RolesPermissionsController < ApplicationController
     rp.destroy
     redirect_to :controller => 'roles', :action => 'show', :id => role
   end
+end
 end

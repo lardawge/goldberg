@@ -1,5 +1,7 @@
+module Goldberg
 class ContentPagesController < ApplicationController
-
+  self.template_root = File.join(File.dirname(__FILE__), '..', '..', 'views')
+  
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
@@ -104,4 +106,5 @@ class ContentPagesController < ApplicationController
   end
 
 
+end
 end
