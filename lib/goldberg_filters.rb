@@ -4,14 +4,14 @@
 module GoldbergFilters
 
   def goldberg_security_filter
-    @settings = SystemSettings.find(:first)
+    @settings = Goldberg::SystemSettings.find(:first)
 
     if @settings
       make_public = false  # Going to check if we need to
 
       # If there's already a session, check that it's still up to date
       if session[:credentials] and session[:credentials].role_id
-        role = Role.find(session[:credentials].role_id)
+        role = Goldberg::Role.find(session[:credentials].role_id)
         if role
           # Check if the role has been updated
           if role.updated_at > session[:credentials].updated_at
@@ -33,12 +33,12 @@ module GoldbergFilters
       end
 
       if make_public
-        public_role = Role.find(@settings.public_role_id)
+        public_role = Goldberg::Role.find(@settings.public_role_id)
         if not public_role or not public_role.cache or 
             not public_role.cache[:credentials] or 
             not public_role.cache[:menu]
-          Role.rebuild_cache
-          public_role = Role.find(@settings.public_role_id)
+          Goldberg::Role.rebuild_cache
+          public_role = Goldberg::Role.find(@settings.public_role_id)
         end
 
         session[:credentials] = public_role.cache[:credentials]
@@ -50,7 +50,7 @@ module GoldbergFilters
         if session[:last_time] != nil
           if (Time.now - session[:last_time]) > @settings.session_timeout
             logger.info "Session: time expired"
-            AuthController.logout(session)
+            Goldberg::AuthController.logout(session)
             redirect_to @settings.session_expired_page.url
             return false
           else
@@ -72,7 +72,7 @@ module GoldbergFilters
 
       # PERMISSIONS
       # Check whether the user is authorised for this page or action.
-      if not AuthController.authorised?(session, params)
+      if not Goldberg::AuthController.authorised?(session, params)
         redirect_to @settings.permission_denied_page.url
         return false
       end

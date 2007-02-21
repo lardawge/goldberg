@@ -17,13 +17,14 @@ module GoldbergRoutes
 
     routes = [ 
               ['', 
-               {:controller => "content_pages", :action => "view_default"}],
+               {:controller => "goldberg/content_pages",
+                 :action => "view_default"}],
 
               ['menu/*name', 
-               {:controller => 'menu_items', :action => 'link'}],
+               {:controller => 'goldberg/menu_items', :action => 'link'}],
 
               ['*page_name', 
-               {:controller => "content_pages", :action => "view"}]
+               {:controller => "goldberg/content_pages", :action => "view"}]
              ]
 
     route_method = ActionController::Routing::Routes.respond_to?(:add_route)? 
