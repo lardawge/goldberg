@@ -8,10 +8,16 @@ namespace :goldberg do
     end
   end
 
+  desc "PluginAWeek migrations"
+  task :plugin_migrations => :environment do
+    # require 'plugin_migrations'
+    PluginAWeek::PluginMigrations.migrate_plugins
+  end
+  
   desc "Load standard Goldberg tables from files in db/"
-  task :load_starter => 'db:migrate' do
+  task :load_starter => :plugin_migrations do
     goldberg_classes.each do |klass|
-      load_for_class klass, "db"
+      load_for_class klass, "#{File.dirname(__FILE__)}/../db"
     end
   end
 
