@@ -1,3 +1,4 @@
+module Goldberg
 class Permission < ActiveRecord::Base
 
   validates_presence_of :name
@@ -28,4 +29,5 @@ class Permission < ActiveRecord::Base
     return find_by_sql( ["select * from permissions where id not in (select permission_id from roles_permissions where role_id in (?)) order by name", role_id] )
   end
 
+end
 end

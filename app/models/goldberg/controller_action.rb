@@ -1,3 +1,4 @@
+module Goldberg
 class ControllerAction < ActiveRecord::Base
 
   validates_presence_of :name
@@ -77,4 +78,5 @@ class ControllerAction < ActiveRecord::Base
     end
   end
 
+end
 end

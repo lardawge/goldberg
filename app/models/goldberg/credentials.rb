@@ -1,3 +1,4 @@
+module Goldberg
 class Credentials
   
   attr_accessor :role_id, :updated_at, :role_ids
@@ -64,4 +65,5 @@ class Credentials
     
   end
 
+end
 end

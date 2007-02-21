@@ -1,3 +1,4 @@
+module Goldberg
 class Login
   attr_accessor :errors
   attr_accessor :name, :password
@@ -7,4 +8,4 @@ class Login
   end
 
 end
-  
+end

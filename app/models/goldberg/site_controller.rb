@@ -1,3 +1,4 @@
+module Goldberg
 class SiteController < ActiveRecord::Base
 
   validates_presence_of :name
@@ -39,4 +40,5 @@ class SiteController < ActiveRecord::Base
     return classes
   end
 
+end
 end

@@ -1,5 +1,6 @@
 require 'redcloth'
 
+module Goldberg
 class ContentPage < ActiveRecord::Base
   
   validates_presence_of :name
@@ -69,4 +70,5 @@ class ContentPage < ActiveRecord::Base
     return content_html
   end
 
+end
 end

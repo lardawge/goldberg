@@ -1,5 +1,6 @@
 require 'digest/sha1'
 
+module Goldberg
 class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -31,4 +32,5 @@ class User < ActiveRecord::Base
                                                  clear_password)
   end
     
+end
 end

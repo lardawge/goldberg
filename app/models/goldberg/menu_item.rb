@@ -1,3 +1,4 @@
+module Goldberg
 class MenuItem < ActiveRecord::Base
 
   attr_accessor :controller_action, :content_page
@@ -121,4 +122,5 @@ class MenuItem < ActiveRecord::Base
   end
 
   
+end
 end

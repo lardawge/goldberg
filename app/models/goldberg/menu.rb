@@ -1,3 +1,4 @@
+module Goldberg
 class Menu
 
   class Node
@@ -209,4 +210,5 @@ class Menu
     return crumbs
   end
 
+end
 end

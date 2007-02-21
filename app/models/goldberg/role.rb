@@ -1,6 +1,7 @@
 require "credentials"
 require "menu"
 
+module Goldberg
 class Role < ActiveRecord::Base
   serialize :cache
   validates_presence_of :name
@@ -54,4 +55,5 @@ class Role < ActiveRecord::Base
     return parents
   end
 
+end
 end

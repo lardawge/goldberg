@@ -1,3 +1,4 @@
+module Goldberg
 class RolesPermission < ActiveRecord::Base
 
   def RolesPermission.find_for_role(role_ids)
@@ -9,4 +10,5 @@ where role_id in (?) order by permissions.name
 }, role_ids])
   end
 
+end
 end

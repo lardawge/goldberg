@@ -1,3 +1,4 @@
+module Goldberg
 class SystemSettings < ActiveRecord::Base
   set_table_name 'system_settings'
 
@@ -62,4 +63,5 @@ class SystemSettings < ActiveRecord::Base
     end
   end
 
+end
 end
