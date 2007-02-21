@@ -1,0 +1,27 @@
+<h1>Listing menu_items</h1>
+
+<table>
+  <tr>
+  <% for column in MenuItem.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for menu_item in @menu_items %>
+  <tr>
+  <% for column in MenuItem.content_columns %>
+    <td><%=h menu_item.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => menu_item %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => menu_item %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => menu_item }, :confirm => 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @menu_item_pages.current.previous } if @menu_item_pages.current.previous %>
+<%= link_to 'Next page', { :page => @menu_item_pages.current.next } if @menu_item_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New menu_item', :action => 'new' %>

@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+widget_view:
+  id: 1
+  name: widget_view
+  site_controller_id: 2
+sprocket_view:
+  id: 2
+  name: sprocket_view
+  site_controller_id: 1
+widget_edit:
+  id: 3
+  name: widget_edit
+  site_controller_id: 2
+  permission_id: 11
+sprocket_edit:
+  id: 4
+  name: sprocket_edit
+  site_controller_id: 1
+  permission_id: 12
+b_sort_second_in_test:
+  id: 5
+  name: b_sort_second_in_test
+  permission_id: 13
+a_sort_first_in_test:
+  id: 6
+  name: b_sort_first_in_test
+  permission_id: 13

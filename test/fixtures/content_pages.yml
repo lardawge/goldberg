@@ -1,0 +1,41 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+two_of_two_with_dweezel_permissions:
+  id: 1
+  name: c_sort_last_with_dweezel_permissions
+  permission_id: 1
+one_of_two_with_dweezel_permissions:
+  id: 2
+  name: a_sort_first_with_dweezel_permissions
+  permission_id: 1
+one_of_one_with_doozle_permissions:
+  id: 3
+  name: b_sort_middle_with_doozle_permissions
+  permission_id: 2
+without_markup:
+  id: 4
+  name: without_markup
+  content: some bogus content
+with_textile_markup:
+  id: 5
+  name: with_textile_markup
+  markup_style_id: 1
+with_markdown_markup:
+  id: 6
+  name: with_markdown_markup
+  markup_style_id: 2
+site_default_page:
+  id: 7
+  name: site_default
+  content: site_default
+not_found_page:
+  id: 8
+  name: not_found
+  content: not_found
+permission_denied_page:
+  id: 9
+  name: permission_denied
+  content: permission_denied
+session_expired_page:
+  id: 10
+  name: session_expired
+  content: session_expired

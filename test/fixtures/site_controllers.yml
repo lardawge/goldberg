@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+sprocket_controller:
+  id: 1
+  name: sprocket_controller
+  permission_id: 10
+widget_controller:
+  id: 2
+  name: widget_controller
+  permission_id: 9

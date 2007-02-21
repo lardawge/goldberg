@@ -1,0 +1,23 @@
+<%= error_messages_for 'user' %>
+
+<!--[form:user]-->
+<p><label for="user_name">Name</label><br/>
+<%= text_field 'user', 'name'  %></p>
+
+<p><label for="user_fullname">Full Name</label><br/>
+<%= text_field 'user', 'fullname'  %></p>
+
+<p><label for="user_email">E-mail Address</label><br/>
+<%= text_field 'user', 'email'  %></p>
+
+<p><label for="role_id">Role</label><br/>
+<%= collection_select 'user', 'role_id', @all_roles, :id, :name %></p>
+
+<p><label for="password">Password</label><br/>
+<%= password_field 'user', 'clear_password' %></p>
+
+<p><label for="confirm_password"> Confirm Password</label><br/>
+<%= password_field 'user', 'confirm_password' %></p>
+
+<!--[eoform:user]-->
+
