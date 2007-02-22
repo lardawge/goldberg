@@ -2,27 +2,26 @@
 namespace :goldberg do
 
   desc "Dump standard Goldberg tables to files in db/"
-  task :dump_starter => :environment do
+  task :dump_bootstrap => :environment do
     goldberg_classes.each do |klass|
-      dump_for_class klass, "db"
+      dump_for_class klass, "#{File.dirname(__FILE__)}/../db"
     end
   end
 
   desc "PluginAWeek migrations"
   task :plugin_migrations => :environment do
-    # require 'plugin_migrations'
     PluginAWeek::PluginMigrations.migrate_plugins
   end
   
   desc "Load standard Goldberg tables from files in db/"
-  task :load_starter => :plugin_migrations do
+  task :load_bootstrap => :plugin_migrations do
     goldberg_classes.each do |klass|
       load_for_class klass, "#{File.dirname(__FILE__)}/../db"
     end
   end
 
   desc "Install Goldberg"
-  task :install => :load_starter do
+  task :install => :load_bootstrap do
     index = "#{RAILS_ROOT}/public/index.html"
     FileTest.exists?(index) and File.delete(index)
   end
@@ -51,13 +50,15 @@ end
 
 
 def goldberg_classes
-  return [ MarkupStyle, Permission, SiteController, 
-	   ContentPage, ControllerAction, MenuItem, 
-           Role, RolesPermission, SystemSettings, User ]
+  return [ Goldberg::MarkupStyle, Goldberg::Permission, 
+           Goldberg::SiteController, Goldberg::ContentPage,
+           Goldberg::ControllerAction, Goldberg::MenuItem, 
+           Goldberg::Role, Goldberg::RolesPermission,
+           Goldberg::SystemSettings, Goldberg::User ]
 end
 
 def dump_for_class(klass, dest)
-  filename = "#{dest}/#{klass.to_s}.yml"
+  filename = "#{dest}/#{klass.to_s.sub(/^Goldberg::/, '')}.yml"
   records = klass.find(:all)
   File.open(filename, 'w') do |out|  
     YAML.dump(records, out)
@@ -65,7 +66,7 @@ def dump_for_class(klass, dest)
 end
 
 def load_for_class(klass, src)
-  filename = "#{src}/#{klass.to_s}.yml"
+  filename = "#{src}/#{klass.to_s.sub(/^Goldberg::/, '')}.yml"
   File.open(filename) do |src|
     records = YAML::load(src)
     records.each do |src_rec|

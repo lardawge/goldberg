@@ -10,7 +10,7 @@ if session[:menu]
   <li<%= if selected then ' class="selected"' end %>>
     <a href="/menu/<%= item.name %>"><%= item.label %></a>
     <%= if selected and depth > 0 
-	  render :partial => 'menu_items/menubar', 
+	  render :partial => 'goldberg/menu_items/menubar', 
             :locals => {:level => level + 1, :depth => depth - 1,
 		        :class_attr => class_attr }
         end %>

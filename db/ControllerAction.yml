@@ -1,91 +1,106 @@
 --- 
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: view_default
     permission_id: "3"
     id: "1"
+    url_to_use: 
     site_controller_id: "1"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: view
     permission_id: "3"
     id: "2"
+    url_to_use: 
     site_controller_id: "1"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "3"
+    url_to_use: 
     site_controller_id: "7"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "4"
+    url_to_use: 
     site_controller_id: "6"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: login
     permission_id: "4"
     id: "5"
+    url_to_use: 
     site_controller_id: "3"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: logout
     permission_id: "4"
     id: "6"
+    url_to_use: 
     site_controller_id: "3"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: link
     permission_id: "4"
     id: "7"
+    url_to_use: 
     site_controller_id: "5"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "8"
+    url_to_use: 
     site_controller_id: "1"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "9"
+    url_to_use: 
     site_controller_id: "8"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "10"
+    url_to_use: 
     site_controller_id: "2"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "11"
+    url_to_use: 
     site_controller_id: "5"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "12"
+    url_to_use: 
     site_controller_id: "9"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: forgotten
     permission_id: "4"
     id: "13"
+    url_to_use: 
     site_controller_id: "3"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: login_failed
     permission_id: "4"
     id: "14"
+    url_to_use: 
     site_controller_id: "3"
-- !ruby/object:ControllerAction 
+- !ruby/object:Goldberg::ControllerAction 
   attributes: 
     name: list
     permission_id: 
     id: "15"
+    url_to_use: 
     site_controller_id: "10"

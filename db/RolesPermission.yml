@@ -1,25 +1,25 @@
 --- 
-- !ruby/object:RolesPermission 
+- !ruby/object:Goldberg::RolesPermission 
   attributes: 
     permission_id: "1"
     role_id: "3"
     id: "4"
-- !ruby/object:RolesPermission 
+- !ruby/object:Goldberg::RolesPermission 
   attributes: 
     permission_id: "3"
     role_id: "1"
     id: "6"
-- !ruby/object:RolesPermission 
+- !ruby/object:Goldberg::RolesPermission 
   attributes: 
     permission_id: "2"
     role_id: "3"
     id: "7"
-- !ruby/object:RolesPermission 
+- !ruby/object:Goldberg::RolesPermission 
   attributes: 
     permission_id: "4"
     role_id: "1"
     id: "9"
-- !ruby/object:RolesPermission 
+- !ruby/object:Goldberg::RolesPermission 
   attributes: 
     permission_id: "5"
     role_id: "2"

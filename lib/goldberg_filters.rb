@@ -1,5 +1,7 @@
 # GoldbergFilters
-
+require 'goldberg/credentials'
+require 'goldberg/menu'
+require 'goldberg/user'
 
 module GoldbergFilters
 

@@ -1,5 +1,5 @@
 --- 
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: home
     controller_action_id: 
@@ -8,7 +8,7 @@
     seq: "1"
     label: Home
     parent_id: 
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: contact_us
     controller_action_id: 
@@ -17,7 +17,7 @@
     seq: "3"
     label: Contact Us
     parent_id: 
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: admin
     controller_action_id: 
@@ -26,7 +26,7 @@
     seq: "2"
     label: Administration
     parent_id: 
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/permissions
     controller_action_id: "4"
@@ -35,7 +35,7 @@
     seq: "3"
     label: Permissions
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/roles
     controller_action_id: "3"
@@ -44,7 +44,7 @@
     seq: "2"
     label: Roles
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/pages
     controller_action_id: "8"
@@ -53,7 +53,7 @@
     seq: "5"
     label: Content Pages
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/controllers
     controller_action_id: "9"
@@ -62,7 +62,7 @@
     seq: "4"
     label: Controllers / Actions
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup
     controller_action_id: 
@@ -71,7 +71,7 @@
     seq: "1"
     label: Setup
     parent_id: "3"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/menus
     controller_action_id: "11"
@@ -80,7 +80,7 @@
     seq: "6"
     label: Menu Editor
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/system_settings
     controller_action_id: "12"
@@ -89,7 +89,7 @@
     seq: "7"
     label: System Settings
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: setup/users
     controller_action_id: "15"
@@ -98,7 +98,7 @@
     seq: "1"
     label: Users
     parent_id: "9"
-- !ruby/object:MenuItem 
+- !ruby/object:Goldberg::MenuItem 
   attributes: 
     name: credits
     controller_action_id: 

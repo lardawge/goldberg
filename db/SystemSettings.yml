@@ -1,5 +1,5 @@
 --- 
-- !ruby/object:SystemSettings 
+- !ruby/object:Goldberg::SystemSettings 
   attributes: 
     session_expired_page_id: "2"
     session_timeout: "7200"

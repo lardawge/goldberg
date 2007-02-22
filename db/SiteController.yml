@@ -1,67 +1,67 @@
 --- 
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: content_pages
+    name: goldberg/content_pages
     permission_id: "1"
     id: "1"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: controller_actions
+    name: goldberg/controller_actions
     permission_id: "1"
     id: "2"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: auth
+    name: goldberg/auth
     permission_id: "1"
     id: "3"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: markup_styles
+    name: goldberg/markup_styles
     permission_id: "1"
     id: "4"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: menu_items
+    name: goldberg/menu_items
     permission_id: "1"
     id: "5"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: permissions
+    name: goldberg/permissions
     permission_id: "1"
     id: "6"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: roles
+    name: goldberg/roles
     permission_id: "1"
     id: "7"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: site_controllers
+    name: goldberg/site_controllers
     permission_id: "1"
     id: "8"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: system_settings
+    name: goldberg/system_settings
     permission_id: "1"
     id: "9"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: users
+    name: goldberg/users
     permission_id: "1"
     id: "10"
     builtin: "1"
-- !ruby/object:SiteController 
+- !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: roles_permissions
+    name: goldberg/roles_permissions
     permission_id: "1"
     id: "11"
     builtin: "1"
