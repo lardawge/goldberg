@@ -7,8 +7,7 @@
     end %>><%= item.label %></a>
   <% if item.children -%>
 <ul>
-  <%= render :partial => 'menu_items/suckerfish', 
-      :locals => {:items => item.children} %>
+  <%= render :file => "#{RAILS_ROOT}/vendor/plugins/goldberg/app/views/goldberg/menu_items/_suckerfish.rhtml", :use_full_path => false, :locals => {:items => item.children} %>
 </ul>
   <% end -%>
 </li>
