@@ -63,18 +63,26 @@ module GoldbergFilters
       
       # If this is a page request check that it exists, and if not
       # redirect to the "unknown" page
-      if params[:controller] == 'content_pages' and
+      is_page_request = false
+      if params[:controller] == 'goldberg/content_pages' and
           params[:action] == 'view'
+        is_page_request = true
         if not session[:credentials].pages.has_key?(params[:page_name].to_s)
           logger.warn "(Unknown page? #{params[:page_name].to_s})"
           redirect_to @settings.not_found_page.url
           return false
         end
       end
-
+      
       # PERMISSIONS
       # Check whether the user is authorised for this page or action.
-      if not Goldberg::AuthController.authorised?(session, params)
+      if is_page_request
+        authorised = session[:credentials].page_authorised?(params[:page_name].to_s)
+      else
+        authorised = session[:credentials].action_authorised?(params[:controller],
+                                                              params[:action])
+      end
+      if not authorised
         redirect_to @settings.permission_denied_page.url
         return false
       end

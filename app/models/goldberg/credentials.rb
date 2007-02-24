@@ -4,7 +4,8 @@ module Goldberg
     attr_accessor :role_id, :updated_at, :role_ids
     attr_accessor :permission_ids
     attr_accessor :controllers, :actions, :pages
-
+    attr_accessor :user
+    
     # Create a new credentials object for the given role
     def initialize(role_id)
       @role_id = role_id
@@ -63,5 +64,65 @@ module Goldberg
       
     end
 
+    def controller_authorised?(controller)
+      authorised = false  # default
+      if @controllers.has_key?(controller)
+        if @controllers[controller]
+          # logger.info "Controller: authorised"
+          authorised = true
+        else
+          # logger.info "Controller: NOT authorised"
+        end
+      else
+      end
+      return authorised
+    end
+    
+    def action_authorised?(controller, action)
+      authorised = false  # default
+      check_controller = false
+
+      # Check if there's a specific permission for an action
+      if @actions.has_key?(controller)
+        if @actions[controller].has_key?(action)
+          if @actions[controller][action]
+            # logger.info "Action: authorised"
+            authorised = true
+          else
+            # logger.info "Action: NOT authorised"
+          end
+        else
+          check_controller = true
+        end
+      else
+        check_controller = true
+      end
+      
+      # Check if there's a general permission for a controller
+      if check_controller
+        authorised = controller_authorised?(controller)
+      end
+      
+      # logger.info "Authorised? #{authorised.to_s}"
+      return authorised
+    end
+
+    def page_authorised?(page)
+      authorised = false  # default
+      
+      if page and @pages.has_key?(page.to_s)
+        if @pages[page.to_s] == true
+          # logger.info "Page: authorised"
+          authorised = true
+        else
+        # logger.info "Page: NOT authorised"
+        end
+      else
+        # logger.warn "(Unknown page? #{page})"
+      end
+      
+      return authorised
+    end
+    
   end
 end

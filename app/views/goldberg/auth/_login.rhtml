@@ -1,6 +1,6 @@
 <% if session[:user] -%>
 <p> User:&nbsp;<%= h(session[:user].name) %>
-<%= start_form_tag :controller => 'auth', :action => 'logout' %>
+<%= start_form_tag :controller => 'goldberg/auth', :action => 'logout' %>
   <%= submit_tag "Logout" %>
 <%= end_form_tag %>
 </p>
@@ -12,7 +12,7 @@
    <div id="ErrorExplanation"><%= flash[:notice] %></div>
 <% end -%>
 
-<%= start_form_tag :controller => 'auth', :action => 'login' %>
+<%= start_form_tag :controller => 'goldberg/auth', :action => 'login' %>
     <p><label for="login_name">Name</label><br/>
     <%= text_field 'login', 'name', :size => 12 %></p>
 
@@ -22,5 +22,5 @@
   <%= submit_tag "Login" %>
 <%= end_form_tag %>
 <p><%= link_to "Forgotten your password?", 
-       :controller => 'auth', :action => 'forgotten' %></p>
+       :controller => 'goldberg/auth', :action => 'forgotten' %></p>
 <% end %>
