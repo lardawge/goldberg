@@ -13,12 +13,12 @@
 for each:</p>
 
 <ul class="roles_list"> <% for role in @roles do %>
-  <li> <%= link_to role.name, :controller => 'roles',
+  <li> <%= link_to role.name, :controller => 'goldberg/roles',
              :action => 'show', :id => role.id %> 
-  <% role_perms = Permission.find_for_role(role.id) 
+  <% role_perms = Goldberg::Permission.find_for_role(role.id) 
     if role_perms.size > 0 -%>
     <ul class="permissions_list"> <% for p in role_perms do %>
-      <li> <%= link_to p.name, :controller => 'permissions',
+      <li> <%= link_to p.name, :controller => 'goldberg/permissions',
                  :action => 'show', :id => p.id %> </li>
       <% end -%>
     </ul>
@@ -35,11 +35,11 @@ for each:</p>
 <table>
 <% for rp in @rps do %>
   <tr>
-    <td><%= image_tag("/images/permission.png") %></td>
-    <td><%= link_to rp.name, :controller => 'permissions',
+    <td><%= image_tag("/goldberg/images/permission.png") %></td>
+    <td><%= link_to rp.name, :controller => 'goldberg/permissions',
               :action => 'show', :id => rp.permission_id %> </td>
-    <td><%= link_to image_tag("/images/delete.png") + ' Remove', 
-	    { :controller => 'roles_permissions', 
+    <td><%= link_to image_tag("/goldberg/images/delete.png") + ' Remove', 
+	    { :controller => 'goldberg/roles_permissions', 
               :action => 'destroy', :id => rp.id }, 
 	    :confirm => 'Remove this Permission from this Role?', 
 	    :post => true %></td>
@@ -51,7 +51,7 @@ for each:</p>
 <% end -%>
 
 <br/>
-<p><%= link_to image_tag("/images/add.png") + ' Add Permission', { :controller => 'roles_permissions',
+<p><%= link_to image_tag("/goldberg/images/add.png") + ' Add Permission', { :controller => 'goldberg/roles_permissions',
        :action => 'new_permission_for_role',
        :id => @role.id
        }%> for this Role</p>
@@ -61,7 +61,7 @@ for each:</p>
 <% if @users and @users.length > 0 -%>
 <ul>
   <% for user in @users do -%>
-  <li><%= link_to user.name, :controller => 'users',
+  <li><%= link_to user.name, :controller => 'goldberg/users',
           :action => 'show', :id => user.id %></li>
   <% end -%>
 </ul>

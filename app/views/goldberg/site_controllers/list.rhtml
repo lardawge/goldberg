@@ -27,13 +27,13 @@
   first = true
 -%>
 
-<%= render :partial => 'layouts/tabpanel_js',
+<%= render :partial => 'goldberg/layouts/tabpanel_js',
     :locals => {:div_ids => div_ids} -%>
 
 
 <% if @has_unknown -%>
 <div id="unknown" style="display:<%= if first then 'block' else 'none' end %>;">
-<%= render :partial => 'layouts/tabpanel_list',
+<%= render :partial => 'goldberg/layouts/tabpanel_list',
     :locals => {:div_ids => div_ids, :div_names => div_names,
                 :div_current => 'unknown' } %>
 
@@ -51,7 +51,7 @@ classes, but they have not yet been set up in Goldberg:</p></div>
 
 <% if @has_missing -%>
 <div id="missing" style="display:<%= if first then 'block' else 'none' end %>;">
-<%= render :partial => 'layouts/tabpanel_list',
+<%= render :partial => 'goldberg/layouts/tabpanel_list',
     :locals => {:div_ids => div_ids, :div_names => div_names,
                 :div_current => 'missing' } %>
 
@@ -68,7 +68,7 @@ up in Goldberg, but the Ruby classes for these appear to be missing.</p>
 
 <% if @has_app -%>
 <div id="app" style="display:<%= if first then 'block' else 'none' end %>;">
-<%= render :partial => 'layouts/tabpanel_list',
+<%= render :partial => 'goldberg/layouts/tabpanel_list',
     :locals => {:div_ids => div_ids, :div_names => div_names,
                 :div_current => 'app' } %>
 
@@ -84,7 +84,7 @@ application (i.e. they are not Goldberg's built-in controllers).</p></div>
 
 <% if @has_builtin %>
 <div id="builtin" style="display:<%= if first then 'block' else 'none' end %>;">
-<%= render :partial => 'layouts/tabpanel_list',
+<%= render :partial => 'goldberg/layouts/tabpanel_list',
     :locals => {:div_ids => div_ids, :div_names => div_names,
                 :div_current => 'builtin' } %>
 

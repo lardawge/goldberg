@@ -10,8 +10,7 @@ if session[:menu]
   <li<%= if selected then ' class="selected"' end %>>
     <a href="/menu/<%= item.name %>"><%= item.label %></a>
     <%= if selected and depth > 0 
-	  render :partial => 'goldberg/menu_items/menubar', 
-            :locals => {:level => level + 1, :depth => depth - 1,
+	  render :file => "#{RAILS_ROOT}/vendor/plugins/goldberg/app/views/goldberg/menu_items/_menubar.rhtml", :use_full_path => false, :locals => {:level => level + 1, :depth => depth - 1,
 		        :class_attr => class_attr }
         end %>
   </li>
