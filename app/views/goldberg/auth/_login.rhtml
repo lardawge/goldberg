@@ -1,5 +1,5 @@
-<% if session[:user] -%>
-<p> User:&nbsp;<%= h(session[:user].name) %>
+<% if Goldberg.user -%>
+<p> User:&nbsp;<%= h(Goldberg.user.name) %>
 <%= start_form_tag :controller => 'goldberg/auth', :action => 'logout' %>
   <%= submit_tag "Logout" %>
 <%= end_form_tag %>

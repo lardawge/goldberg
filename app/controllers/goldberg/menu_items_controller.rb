@@ -147,8 +147,10 @@ module Goldberg
     end
 
     def link
-      node = session[:menu].select(params[:name].to_s)
+      # node = session[:menu].select(params[:name].to_s)
+      node = Goldberg.menu.select(params[:name].to_s)
       if node
+        session[:goldberg][:menu_item] = params[:name].to_s
         redirect_to node.url
       else
         logger.error "(error in menu)"
@@ -156,9 +158,9 @@ module Goldberg
       end
     end
 
-    def noview
-      @items = MenuItem.items_for_permissions(session[:credentials].permission_ids)
-    end
+#     def noview
+#       @items = MenuItem.items_for_permissions(session[:credentials].permission_ids)
+#     end
 
 
     protected

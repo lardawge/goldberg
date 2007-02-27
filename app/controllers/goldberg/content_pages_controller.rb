@@ -24,8 +24,8 @@ module Goldberg
     def view
       @content_page = ContentPage.find_by_name(params[:page_name])
       if not @content_page
-        if @settings
-          @content_page = ContentPage.find(@settings.not_found_page_id)
+        if Goldberg.settings
+          @content_page = ContentPage.find(Goldberg.settings.not_found_page_id)
         else
           @content_page = ContentPage.new(:id => nil, 
                                           :content => '(no such page)')
@@ -34,8 +34,8 @@ module Goldberg
     end
 
     def view_default
-      if @settings
-        @content_page = ContentPage.find(@settings.site_default_page_id)
+      if Goldberg.settings
+        @content_page = ContentPage.find(Goldberg.settings.site_default_page_id)
       else
         @content_page = ContentPage.new(:id => nil, 
                                         :content => '(Site not configured)')
@@ -101,7 +101,7 @@ module Goldberg
                                     :order => 'label',
                                     :conditions => ['content_page_id=?', 
                                                     @content_page.id])
-        @system_pages = @settings.system_pages @content_page.id
+        @system_pages = Goldberg.settings.system_pages @content_page.id
       end
     end
 

@@ -1,6 +1,6 @@
 <% for item_id in items do 
-     item = session[:menu].get_item(item_id)
-     selected = session[:menu].selected?(item.id) -%>
+     item = Goldberg.menu.get_item(item_id)
+     selected = Goldberg.menu.selected?(item.id) -%>
 <li>
   <a href="/menu/<%= item.name %>"<%= if item.children
     ' class="daddy"' 

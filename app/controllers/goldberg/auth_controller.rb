@@ -6,6 +6,36 @@ module Goldberg
     verify :method => :post, :only => [ :login, :logout ],
     :redirect_to => { :action => :list }
 
+    def self.set_user(session, user_id = nil)
+      session[:goldberg] ||= {}
+      find_user_id = user_id || session[:goldberg][:user_id]
+      Goldberg.user = (if find_user_id then Goldberg::User.find(find_user_id) else nil end)
+      
+      if Goldberg.user
+        role = Goldberg.user.role
+      else
+        role = Goldberg::Role.find(Goldberg.settings.public_role_id)
+      end
+        
+      if role
+        if not role.cache or not role.cache.has_key?(:credentials)
+          Role.rebuild_cache
+          role = Goldberg::Role.find(role.id)
+        end
+        # session[:credentials] = role.cache[:credentials]
+        Goldberg.credentials = role.cache[:credentials]
+        Goldberg.menu = role.cache[:menu]
+        Goldberg.menu.select(session[:goldberg][:menu_item])
+        logger.info "Logging in user as role #{role.name}"
+      else
+        logger.error "Something went seriously wrong with the role"
+      end
+
+      if Goldberg.user 
+        session[:goldberg][:user_id] = Goldberg.user.id
+      end
+    end
+    
     def login
       if request.get?
         AuthController.clear_session(session)
@@ -14,21 +44,9 @@ module Goldberg
         
         if user and user.check_password(params[:login][:password])
           logger.info "User #{params[:login][:name]} successfully logged in"
-          session[:user] = user
-          if user.role_id
-            role = Role.find(user.role_id)
-            if role
-              if not role.cache or not role.cache.has_key?(:credentials)
-                Role.rebuild_cache
-              end
-              session[:credentials] = role.cache[:credentials]
-              session[:menu] = role.cache[:menu]
-              logger.info "Logging in user as role #{session[:credentials].class}"
-            else
-              logger.error "Something went seriously wrong with the role"
-            end
-          end
-          
+          Goldberg.user = user
+          self.class.set_user(session, user.id)
+
           respond_to do |wants|
             wants.html do
               redirect_to "/"
@@ -61,7 +79,7 @@ module Goldberg
     end
 
     def logout
-      AuthController.logout(session)
+      self.class.logout(session)
       redirect_to '/'
     end
 
@@ -74,11 +92,7 @@ module Goldberg
     end
 
     def self.clear_session(session)
-      session[:user_id] = nil
-      session[:user] = nil
-      session[:credentials] = nil
-      session[:menu] = nil
-      session[:clear] = true
+      session[:goldberg] = {}
     end
 
   end

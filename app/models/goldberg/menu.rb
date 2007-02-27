@@ -123,10 +123,7 @@ module Goldberg
           end
         end  # if items.size > 0
         
-        
-        if @root.children and @root.children.length > 0
-          select(@by_id[@root.children[0]].name) 
-        end
+        self.select(nil)
       end  # if items
       
     end
@@ -136,7 +133,7 @@ module Goldberg
     # menu.  If not returns nil.
 
     def select(name)
-      if @by_name.has_key?(name)
+      if name and @by_name.has_key?(name)
         node = @by_name[name]
         @selected = Hash.new
         @vector = Array.new
@@ -151,7 +148,9 @@ module Goldberg
         @vector.unshift @root
         return @by_name[name]
       else
-        return nil
+        if @root.children and @root.children.length > 0
+          select(@by_id[@root.children[0]].name) 
+        end
       end
     end
 
