@@ -55,6 +55,7 @@ module Goldberg
         flash[:notice] = 'SystemSettings was successfully updated.'
         redirect_to :action => 'show', :id => @system_settings
       else
+        foreign
         render :action => 'edit'
       end
     end
@@ -68,6 +69,8 @@ module Goldberg
 
     def foreign
       @roles = Role.find(:all, :order => 'name')
+      @self_reg_roles = @roles.clone
+      @self_reg_roles.unshift Role.new(:id => nil, :name => '(none)')
       @pages = ContentPage.find(:all, :order => 'name')
       @markup_styles = MarkupStyle.find(:all, :order => 'name')
       @markup_styles.unshift MarkupStyle.new(:id => nil, :name => '(none)')

@@ -23,6 +23,10 @@ module Goldberg
         self.password = Digest::SHA1.hexdigest(self.password_salt +
                                                self.clear_password)
       end
+      if self.self_reg_confirmation_required
+        self.confirmation_key = Digest::SHA1.hexdigest(self.object_id.to_s +
+                                                       rand.to_s)
+      end
     end
     
     def after_save

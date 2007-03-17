@@ -1,23 +1,44 @@
 <%= error_messages_for 'user' %>
 
-<!--[form:user]-->
-<p><label for="user_name">Name</label><br/>
-<%= text_field 'user', 'name'  %></p>
+<table>
 
-<p><label for="user_fullname">Full Name</label><br/>
-<%= text_field 'user', 'fullname'  %></p>
+<tr>
+<th>User ID/screen name </th>
+<td><%= text_field 'user', 'name'  %></td>
+</tr>
 
-<p><label for="user_email">E-mail Address</label><br/>
-<%= text_field 'user', 'email'  %></p>
+<tr>
+<th> Full name (real) </th>
+<td><%= text_field 'user', 'fullname'  %></td>
+</tr>
 
-<p><label for="role_id">Role</label><br/>
-<%= collection_select 'user', 'role_id', @all_roles, :id, :name %></p>
+<tr>
+<th> E-mail Address </th>
+<td><%= text_field 'user', 'email'  %></td>
+</tr>
 
-<p><label for="password">Password</label><br/>
-<%= password_field 'user', 'clear_password' %></p>
+<% if not @self_reg -%>
+<tr>
+<th> Role </th>
+<td> <%= collection_select 'user', 'role_id', @roles, :id, :name %> </td>
+</tr>
+<% end -%>
 
-<p><label for="confirm_password"> Confirm Password</label><br/>
-<%= password_field 'user', 'confirm_password' %></p>
+<% if @password_change -%>
+<tr>
+<th> Old Password </th>
+<td> <%= password_field 'user', 'old_password' %> </td>
+</tr>
+<% end -%>
 
-<!--[eoform:user]-->
+<tr>
+<th> <% if @password_change then %> New <% end %>Password </th>
+<td> <%= password_field 'user', 'clear_password' %> </td>
+</tr>
 
+<tr>
+<th> Confirm Password </th>
+<td> <%= password_field 'user', 'confirm_password' %> </td>
+</tr>
+
+</table>

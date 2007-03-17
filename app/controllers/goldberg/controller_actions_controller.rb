@@ -113,7 +113,7 @@ module Goldberg
       actions = Hash.new()
       
       if classes.has_key? classname
-        controller = classes[controller_name]
+        controller = classes[classname]
 
         for method in controller.public_instance_methods do
           actions[method] = true

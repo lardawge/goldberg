@@ -46,5 +46,28 @@ Denied Page </label><br/>
 <p><label for="system_settings_menu_depth">Menu Depth</label><br/>
 <%= text_field 'system_settings', 'menu_depth'  %></p>
 
+<p><label for="site_url_prefix">Site URL prefix</label><br/>
+<%= text_field 'system_settings', 'site_url_prefix'  %></p>
+
+<p><label for="self_reg_enabled"> Self-registration Enabled </label><br/>
+<%= check_box 'system_settings', 'self_reg_enabled'  %></p>
+
+<p><label for="self_reg_role_id"> Self-registered Role </label><br/>
+<%= collection_select 'system_settings', 'self_reg_role_id',
+    @self_reg_roles, :id, :name %> </p>
+
+<p><label for="self_reg_confirmation_required"> Self-registration
+Confirmation Required </label><br/>
+<%= check_box 'system_settings', 'self_reg_confirmation_required'  %></p>
+
+<p><label for="self_reg_confirmation_error_page_id">Self-registration
+confirmation error page</label><br/>
+<%= collection_select :system_settings, :self_reg_confirmation_error_page_id,
+   @pages, :id, :name %> </p>
+
+<p><label for="self_reg_send_confirmation_email"> Self-registration
+Send Confirmation Email</label><br/>
+<%= check_box 'system_settings', 'self_reg_send_confirmation_email' %></p>
+
 <!--[eoform:system_settings]-->
 

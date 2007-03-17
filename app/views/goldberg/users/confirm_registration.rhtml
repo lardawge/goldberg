@@ -1,0 +1,26 @@
+<% if @user %>
+  <h1> Registration Confirmation </h1>
+  
+  <p> To confirm your registration, please enter the username and
+password you provided when you registered for the site. </p>
+
+  <% form_tag :action => 'confirm_registration_submit', :id => @user do %>
+    <%= hidden_field 'user', 'confirmation_key' %>
+    
+    <table>
+    
+    <tr>
+    <th> Username </th>
+    <td><%= text_field 'user', 'name' %></td>
+    </tr>
+  
+    <tr>
+    <th> Password </th>
+    <td> <%= password_field 'user', 'clear_password' %></td>
+    </tr>
+  
+    </table>
+  
+    <%= submit_tag 'Confirm' %>
+  <% end %>
+<% end %>

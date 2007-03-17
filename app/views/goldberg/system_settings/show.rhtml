@@ -115,13 +115,75 @@ Timeout, above).</p>
 
 <tr class="settings_row">
 <th>Menu Depth</th><td><%=h @system_settings.menu_depth %></td>
-</table>
 <tr><td colspan=2>
 <div class="guidance_text">
 <p>The maximum top/side menu depth supported by the page template and
 stylesheet you have set up for the site.</p>
 </div>
 </td></tr>
+
+<tr class="settings_row">
+<th>Site URL Prefix</th><td><%=h @system_settings.site_url_prefix %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p> The prefix address ("http://host:port/") to be used in correspondence for
+this site (e.g. for links in self-registration emails). </p>
+</div>
+</td></tr>
+
+<tr class="settings_row">
+<th> Self-registration enabled </th><td><%=h @system_settings.self_reg_enabled %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p> Whether self-registration is enabled for this site. </p>
+</div>
+</td></tr>
+
+<tr class="settings_row">
+<th> Self-registration Role </th><td><%=h @system_settings.self_reg_role.name %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p> The Role to be applied to self-registered users. </p>
+</div>
+</td></tr>
+
+<tr class="settings_row">
+<th> Self-registration confirmation required </th>
+<td><%=h @system_settings.self_reg_confirmation_required %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p> Whether self-registered user accounts are disabled until they are
+confirmed, either by the site administrator or via a confirmation
+email (if below is enabled). </p>
+</div>
+</td></tr>
+
+<tr class="settings_row">
+<th> Self-registration confirmation error page </th>
+<td><% if @system_settings.self_reg_confirmation_error_page_id and
+	@system_settings.self_reg_confirmation_error_page_id > 0 %>
+<%= link_to h(@system_settings.self_reg_confirmation_error_page.title),
+	  :controller => 'content_pages', :action => 'show',
+	  :id => @system_settings.self_reg_confirmation_error_page_id %>
+<% end %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p>Page displayed when an unconfirmed user tries to access the site.</p>
+</div>
+</td></tr>
+
+
+<tr class="settings_row">
+<th> Self-registration confirmation email</th>
+<td><%=h @system_settings.self_reg_send_confirmation_email %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p> Whether an email is to be sent to self-registered users with a link to
+confirm their registration. </p>
+</div>
+</td></tr>
+
+</table>
 
 <hr/>
 <p><%= link_to 'Edit', :action => 'edit', :id => @system_settings %></p>
