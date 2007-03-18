@@ -24,8 +24,7 @@ module Goldberg
                                                self.clear_password)
       end
       if self.self_reg_confirmation_required
-        self.confirmation_key = Digest::SHA1.hexdigest(self.object_id.to_s +
-                                                       rand.to_s)
+        self.set_confirmation_key
       end
     end
     
@@ -37,6 +36,28 @@ module Goldberg
       self.password == Digest::SHA1.hexdigest(self.password_salt.to_s +
                                               clear_password)
     end
+
+    def set_confirmation_key
+      self.confirmation_key = Digest::SHA1.hexdigest(self.object_id.to_s +
+                                                       rand.to_s)
+    end
+
+    def email_valid?
+      self.email &&
+        self.email.length > 0 &&
+        # http://regexlib.com/DisplayPatterns.aspx
+        self.email =~ /\A.+@[^\.].*\.[a-z]{2,}\z/
+    end
+
+    class << self
+      def random_password
+        letters = ('A' .. 'Z').to_a + ('a' .. 'z').to_a
+        password = (1 .. 6).collect do
+          letters[ (rand * letters.length).to_i ]
+        end
+        password.to_s
+      end
+    end  # class methods
     
   end
 end

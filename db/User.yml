@@ -2,9 +2,13 @@
 - !ruby/object:Goldberg::User 
   attributes: 
     name: admin
+    password_expired: 
+    self_reg_confirmation_required: 
     fullname: 
     password_salt: 
     role_id: "3"
     id: "2"
+    password_changed_at: 
     password: d033e22ae348aeb5660fc2140aec35850c4da997
+    confirmation_key: 
     email: 

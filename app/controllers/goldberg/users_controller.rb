@@ -73,8 +73,11 @@ module Goldberg
         @user.self_reg_confirmation_required =
           Goldberg.settings.self_reg_confirmation_required
         if Goldberg.settings.self_reg_send_confirmation_email
-          # Check that the user's email address is well-formed,
-          # e.g. =~ /\A[\w\._%-]+@[\w\.-]+\.[a-zA-Z]{2,4}\z/
+          if not @user.email_valid?
+            flash[:error] = 'A valid email address is required!'
+            render :action => 'new'
+            return
+          end
         end
       end
       
@@ -88,9 +91,7 @@ module Goldberg
           if @self_reg
             if Goldberg.settings.self_reg_confirmation_required
               if Goldberg.settings.self_reg_send_confirmation_email
-                confirm_email = UserMailer.create_confirmation_request(@user.fullname,
-                                                                       @user.email,
-                                                                       @user.confirmation_key)
+                confirm_email = UserMailer.create_confirmation_request(@user)
                 UserMailer.deliver(confirm_email)
               end
               render :action => 'create'
@@ -121,7 +122,7 @@ module Goldberg
     def confirm_registration_submit
       @user = User.find(params[:id])
       # Check password and key etc.
-      if @user.self_reg_confirmation_required and
+      if @user and @user.self_reg_confirmation_required and
           @user.confirmation_key == params[:user][:confirmation_key] and
           @user.check_password(params[:user][:clear_password])
         # Confirmed: remove confirmation flag and confirmation key,
@@ -200,6 +201,71 @@ module Goldberg
     end
     alias_method :delegate_destroy, :destroy
 
+    def forgot_password
+      render :action => 'forgot_password'
+    end
+
+    def forgot_password_submit
+      @user = User.find_by_name_and_email(params[:user][:name],
+                                          params[:user][:email])
+      if @user
+        if (not @user.self_reg_confirmation_required)
+          @user.set_confirmation_key
+          if @user.save
+            # Send email with confirmation key
+            reset_email = UserMailer.create_reset_password_request(@user)
+            UserMailer.deliver(reset_email)
+            render :action => 'forgot_password_submit'
+          else
+            render :action => 'forgot_password'
+          end
+        else
+          flash[:error] = "You can't reset your password because your account is not yet confirmed."
+          render :action => 'forgot_password'
+        end
+      else
+        flash[:error] = "No such user/email."
+        render :action => 'forgot_password'
+      end
+    end
+    
+    def reset_password
+      # Find user by confirmation key.
+      # Render form with confirmation key, username and email.
+      @user = User.find_by_confirmation_key(params[:id])
+      if @user
+        render :action => 'reset_password'
+      else
+        flash[:error] = 'Sorry, but we received no such password reset request.'
+        render :action => 'forgot_password'
+      end
+    end
+
+    def reset_password_submit
+      @user = User.find_by_confirmation_key(params[:id])
+      if @user
+        if (not @user.self_reg_confirmation_required)
+          # set @user.clear_password
+          password = @user.class.random_password
+          @user.clear_password = password
+          @user.password_expired = true
+          if @user.save
+            # Send email with confirmation key
+            password_email = UserMailer.create_reset_password(@user, password)
+            UserMailer.deliver(password_email)
+            render :action => 'reset_password_submit'
+          else
+            render :action => 'reset_password'
+          end
+        else
+          flash[:error] = "You can't reset your password because your account is not yet confirmed."
+          render :action => 'forgot_password'
+        end
+      else
+        flash[:error] = "No such password reset request for user."
+        render :action => 'forgot_password'
+      end
+    end
     
     protected
 

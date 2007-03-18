@@ -78,7 +78,7 @@ module GoldbergFilters
         is_page_request = true
         if not Goldberg.credentials.pages.has_key?(params[:page_name].to_s)
           logger.warn "(Unknown page? #{params[:page_name].to_s})"
-          respond to do |format|
+          respond_to do |format|
             format.html do
               redirect_to Goldberg.settings.not_found_page.url
             end

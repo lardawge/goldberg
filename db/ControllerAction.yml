@@ -104,3 +104,59 @@
     id: "15"
     url_to_use: 
     site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: self_register
+    permission_id: "4"
+    id: "16"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: confirm_registration
+    permission_id: "4"
+    id: "17"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: confirm_registration_submit
+    permission_id: "4"
+    id: "18"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: self_create
+    permission_id: "4"
+    id: "19"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: forgot_password
+    permission_id: "4"
+    id: "20"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: forgot_password_submit
+    permission_id: "4"
+    id: "21"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: reset_password
+    permission_id: "4"
+    id: "22"
+    url_to_use: ""
+    site_controller_id: "10"
+- !ruby/object:Goldberg::ControllerAction 
+  attributes: 
+    name: reset_password_submit
+    permission_id: "4"
+    id: "23"
+    url_to_use: ""
+    site_controller_id: "10"
