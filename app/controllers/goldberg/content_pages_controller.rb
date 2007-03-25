@@ -90,11 +90,96 @@ module Goldberg
       end
     end
 
+    def fck_filemanager
+      @command = params['Command']
+      @type = (params['Type'] == 'File' ? '' : params['Type'])
+      @subdir = params['CurrentFolder']
+      @path = File.join('/files', @type, @subdir)
+      @dir = File.join(RAILS_ROOT, 'public', @path)
+
+      @incl_files = false
+      
+      case @command
+      when 'GetFolders'
+        fck_files
+      when 'GetFoldersAndFiles'
+        @incl_files = true
+        fck_files
+      when 'CreateFolder'
+        fck_create_folder
+      when 'FileUpload'
+        fck_file_upload
+      else  # huh?
+        render :nothing => true, :status => 400
+      end
+    end
+
+    def fck_speller_pages
+      @textinputs = params['textinputs'][0]
+      @suggestions = ContentPage.speller_pages(CGI.unescape @textinputs)
+      render :action => 'fck_speller_pages', :layout => false
+    end
 
     protected
 
+    def fck_files
+      @dirs = []
+      @files = {}
+      if File.directory? @dir
+        Dir.glob( File.join(@dir, '*') ) do |file|
+          if File.directory? file
+            @dirs << File.basename(file)
+          else
+            @files[File.basename(file)] = File.stat(file).size / 1024
+          end
+        end
+      end
+
+      render :partial => 'fck_files'
+    end
+
+    def fck_create_folder
+      @newdir = File.join(@dir, params['NewFolderName'])
+      @error = 0
+      if not ( File.directory?(@dir) and File.writable?(@dir) )
+        @error = 103  # "You have no permissions to create the folder."
+      elsif ( File.exists?(@newdir) )
+        @error = 101  # "Folder already exists."
+      elsif ( params['NewFolderName'].length == 0 or
+              params['NewFolderName'] =~ /[\/\\:\'\"]/ )
+        @error = 102  # "Invalid folder name."
+      else  # New directory will *probably* be okay.
+        begin
+          Dir.mkdir @newdir
+        rescue
+          @error = 110  # "Unknown error creating folder."
+        end
+      end
+
+      render :partial => 'fck_create_folder'
+    end
+
+    # This method needs better handling: needs to be made more robust,
+    # and compliant with the spec at
+    # http://fckeditor.wikiwikiweb.de/Developer's_Guide/Participating/Server_Side_Integration#Upload
+    def fck_file_upload
+      @mime_file = params['NewFile']
+      @file_name = @mime_file.original_filename
+      @file_url = File.join(@path, @file_name)
+      @new_file = File.join(@dir, @file_name)
+      File.open(@new_file, 'wb') do |file|
+        FileUtils.copy_stream(@mime_file, file)
+      end
+
+      render :text => <<-END
+<script type="text/javascript">
+    window.parent.frames['frmUpload'].OnUploadCompleted(0, '#{@file_url}', '#{@file_name}', '');
+</script>
+END
+    end
+    
     def foreign
-      @markup_styles = MarkupStyle.find(:all, :order => 'name')
+      @markup_styles = ContentPage.markup_styles
       @permissions = Permission.find(:all, :order => 'name')
       if @content_page.id
         @menu_items = MenuItem.find(:all,

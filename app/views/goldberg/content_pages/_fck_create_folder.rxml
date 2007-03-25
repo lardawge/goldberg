@@ -1,0 +1,6 @@
+xml.instruct!
+
+xml.Connector(:command => @command, :resourceType => @type ) do
+  xml.CurrentFolder(:path => @subdir, :url => @path )
+  xml.Error(:number => @error)
+end
