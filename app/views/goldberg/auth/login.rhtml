@@ -4,9 +4,19 @@
    <div id="ErrorExplanation"><%= flash[:notice] %></div>
 <% end -%>
 
-<%= start_form_tag :action => 'login' %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag "Login" %>
-<%= end_form_tag %>
+<p> Please enter your username and password to access the site.</p>
 
-<%= link_to 'Back', :action => 'list' %>
+<% form_tag :action => 'login' do -%>
+  <p><label for="login_name">Name</label><br/>
+  <%= text_field 'login', 'name'  %></p>
+
+  <p><label for="login_password">Password</label><br/>
+  <%= password_field 'login', 'password' %></p>
+
+  <%= submit_tag "Login" %>
+<% end -%>
+
+<br/>
+<h2> Forgot your password? </h2>
+<p><%= link_to "Click here", :controller => 'goldberg/users', 
+         :action => 'forgot_password' %> for further instructions.</p>

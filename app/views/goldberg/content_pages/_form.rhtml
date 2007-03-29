@@ -16,24 +16,17 @@ Required</label><br/>
       @permissions, :id, :name %></p>
 
 <p>Markup Style<br/>
-<%= form.select :markup_style, @markup_styles %></p>
+<%= form.select :markup_style, @markup_styles %> </p>
 
-<%= javascript_include_tag '/fckeditor/fckeditor.js' %>
-<script type="text/javascript">
-window.onload = function()
-{
-var oFCKeditor = new FCKeditor( 'content_text' ) ;
-oFCKeditor.Height = 500 ;
-oFCKeditor.Config['LinkBrowserURL'] = '/fckeditor/editor/filemanager/browser/default/browser.html?Connector=/goldberg/content_pages/fck_filemanager' ;
-oFCKeditor.Config['ImageBrowserURL'] = '/fckeditor/editor/filemanager/browser/default/browser.html?Type=Image&Connector=/goldberg/content_pages/fck_filemanager' ;
-oFCKeditor.Config['FlashBrowserURL'] = '/fckeditor/editor/filemanager/browser/default/browser.html?Type=Flash&Connector=/goldberg/content_pages/fck_filemanager' ;
-oFCKeditor.Config['SpellChecker'] = 'SpellerPages' ;
-oFCKeditor.Config['SpellerPagesServerScript'] = '/goldberg/content_pages/fck_speller_pages' ;
-oFCKeditor.ReplaceTextarea() ;
-}
-</script>
-<p><label for="content_page_content">Content</label><br/>
-<%= text_area 'content_page', 'content', :id => "content_text", :width => "100%", :height => "500" %>
+<div id='content_editor'>
+<p>
+<% if @content_page.markup_style == 'FCKeditor' -%>
+<%= fckeditor_text_area 'content_text' %>
+<% else -%>
+<label for="content_page_content">Content</label><br/>
+<% end -%>
+<%= text_area 'content_page', 'content', :id => 'content_text', :cols => 80, :rows => 25 %>
 </p>
+</div>
 
 <!--[eoform:content_page]-->

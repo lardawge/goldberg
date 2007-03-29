@@ -1,26 +1,16 @@
 <% if Goldberg.user -%>
 <p> User:&nbsp;<%= h(Goldberg.user.name) %>
-<%= start_form_tag :controller => 'goldberg/auth', :action => 'logout' %>
+<% form_tag :controller => 'goldberg/auth', :action => 'logout' do -%>
   <%= submit_tag "Logout" %>
-<%= end_form_tag %>
+<% end -%>
 </p>
 
 <% else -%>
-<h1>Login</h1>
-
-<% if flash[:notice] -%>
-   <div id="ErrorExplanation"><%= flash[:notice] %></div>
+<p> <%= link_to "Login", :controller => 'goldberg/auth', 
+          :action => 'login' %>
+<% if Goldberg.settings.self_reg_enabled -%>
+| <%= link_to "Register", :controller => 'goldberg/users', 
+        :action => 'self_register' %>
 <% end -%>
-
-<%= start_form_tag :controller => 'goldberg/auth', :action => 'login' %>
-    <p><label for="login_name">Name</label><br/>
-    <%= text_field 'login', 'name', :size => 12 %></p>
-
-    <p><label for="login_password">Password</label><br/>
-    <%= password_field 'login', 'password', :size => 12 %></p>
-
-  <%= submit_tag "Login" %>
-<%= end_form_tag %>
-<p><%= link_to "Forgotten your password?", 
-       :controller => 'goldberg/auth', :action => 'forgotten' %></p>
-<% end %>
+</p>
+<% end -%>

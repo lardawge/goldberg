@@ -45,6 +45,7 @@ module Goldberg
     def new
       @content_page = ContentPage.new
       foreign
+      @content_page.markup_style = @markup_styles.first
     end
 
     def create
@@ -90,6 +91,7 @@ module Goldberg
       end
     end
 
+    # Entry point for any FCKeditor file operations.
     def fck_filemanager
       @command = params['Command']
       @type = (params['Type'] == 'File' ? '' : params['Type'])
@@ -114,9 +116,11 @@ module Goldberg
       end
     end
 
+    # Invoked by FCKeditor spell check.  Returns a HTML document
+    # containing Javascript with spelling suggestions.
     def fck_speller_pages
       @textinputs = params['textinputs'][0]
-      @suggestions = ContentPage.speller_pages(CGI.unescape @textinputs)
+      @suggestions = ContentPage.speller_pages( CGI.unescape(@textinputs) )
       render :action => 'fck_speller_pages', :layout => false
     end
 

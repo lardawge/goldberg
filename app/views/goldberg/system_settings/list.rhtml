@@ -1,4 +1,4 @@
-<h1>Listing system_settings</h1>
+<h1>System Settings</h1>
 
 <table>
   <tr>
@@ -14,7 +14,7 @@
   <% end %>
     <td><%= link_to 'Show', :action => 'show', :id => system_settings %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => system_settings %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => system_settings }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => system_settings }, :confirm => 'Are you sure?', :method => 'post' %></td>
   </tr>
 <% end %>
 </table>

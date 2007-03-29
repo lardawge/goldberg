@@ -26,13 +26,13 @@
 <% end -%>
 
 <br/>
-<p> <%= link_to image_tag("/images/add.png") + ' Add New Action', {:controller => 'controller_actions',
+<p> <%= link_to image_tag("/goldberg/images/add.png") + ' Add New Action', {:controller => 'controller_actions',
     :action => 'new_for', :id => @site_controller.id } %> 
     for this Controller </p>
 
 <hr/>
 <p><%= link_to 'Edit', :action => 'edit', :id => @site_controller %> |
 <%= link_to 'Delete', {:action => 'destroy', :id => @site_controller}, 
-    :confirm => 'Are you sure?', :post => true %> </p>
+    :confirm => 'Are you sure?', :method => 'post' %> </p>
 
 <p><%= link_to 'Back', :action => 'list' %> to Controllers list</p>

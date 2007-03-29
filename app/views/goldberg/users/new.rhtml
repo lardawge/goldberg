@@ -1,8 +1,19 @@
+<% if @self_reg -%>
+<h1> Register </h1>
+<p> Please fill in the details below to register for the site.</p>
+<% else -%>
 <h1>New user</h1>
+<% end -%>
 
 <% form_tag :action => (@self_reg ? 'self_create' : 'create') do %>
   <%= render :partial => 'form' %>
-  <%= submit_tag "Create" %>
+  <%= submit_tag "Submit" %>
 <% end %>
 
+<br/>
+<% if @self_reg -%>
+<p> Once you have successfully submitted your registration request you
+will be given further instructions.</p>
+<% else -%>
 <%= link_to 'Back', :action => 'list' %>
+<% end -%>

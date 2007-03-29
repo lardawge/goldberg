@@ -2,10 +2,6 @@ module Goldberg
   class AuthController < ApplicationController
     include GoldbergController
 
-    # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-    verify :method => :post, :only => [ :login, :logout ],
-    :redirect_to => { :action => :list }
-
     def self.set_user(session, user_id = nil)
       session[:goldberg] ||= {}
       find_user_id = user_id || session[:goldberg][:user_id]
@@ -38,7 +34,8 @@ module Goldberg
     
     def login
       if request.get?
-        AuthController.clear_session(session)
+        self.class.clear_session(session)
+        render :action => 'login'
       else
         user = User.find_by_name(params[:login][:name])
         
@@ -60,7 +57,8 @@ module Goldberg
           logger.warn "Failed login attempt"
           respond_to do |wants|
             wants.html do
-              redirect_to :action => 'login_failed'
+              flash.now[:error] = "Incorrect username/password"
+              render :action => 'login'
             end
             wants.xml do
               render :nothing => true, :status => 404
@@ -70,16 +68,10 @@ module Goldberg
       end
     end  # def login
     
-    def forgotten
-    end
-
-    def login_failed
-      flash.now[:error] = "Incorrect Name/Password"
-      render :action => 'forgotten'
-    end
-
     def logout
-      self.class.logout(session)
+      if request.post?
+        self.class.logout(session)
+      end
       redirect_to '/'
     end
 
