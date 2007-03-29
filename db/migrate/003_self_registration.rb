@@ -15,9 +15,14 @@ class SelfRegistration < ActiveRecord::Migration
     add_column "#{prefix}users", "confirmation_key", :string
     add_column "#{prefix}users", "password_changed_at", :timestamp
     add_column "#{prefix}users", "password_expired", :boolean
+
+    # ContentPage
+    add_column "#{prefix}content_pages", "markup_style", :string
   end
 
   def self.down
+    remove_column "#{prefix}content_pages", "markup_style"
+    
     remove_column "#{prefix}users", "password_expired"
     remove_column "#{prefix}users", "password_changed_at"
     remove_column "#{prefix}users", "confirmation_key"

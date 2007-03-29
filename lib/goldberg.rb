@@ -25,6 +25,7 @@ module Goldberg
       @user = nil
       @credentials = nil
       @menu = nil
+      @settings = nil
     end
 
   end

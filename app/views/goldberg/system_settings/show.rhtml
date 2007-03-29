@@ -48,25 +48,6 @@ site name.</p>
 </td></tr>
 
 <tr class="settings_row">
-<th>Default Markup Style</th>
-<td><%= if @system_settings.default_markup_style_id
-	  link_to h(@system_settings.default_markup_style.name),
-	    :controller => 'markup_styles', :action => 'show',
-	    :id => @system_settings.default_markup_style_id
-	else
-	  h(@system_settings.default_markup_style.name)
-	end%></td>
-<tr><td colspan=2>
-<div class="guidance_text">
-<p>This markup style will be used by default for newly created
-pages.</p>
-
-<p>See the <a href="#">Markdown</a> or <a href="#">Textile</a>
-websites for further details.</p>
-</div>
-</td></tr>
-
-<tr class="settings_row">
 <th>Default Page</th>
 <td><%= link_to h(@system_settings.site_default_page.title),
 	  :controller => 'content_pages', :action => 'show',

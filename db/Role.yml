@@ -2,7 +2,7 @@
 - !ruby/object:Goldberg::Role 
   attributes: 
     name: Public
-    updated_at: 2007-03-19 00:23:16
+    updated_at: 2007-03-29 22:10:31
     cache: |
       --- 
       :credentials: !ruby/object:Goldberg::Credentials 
@@ -66,7 +66,7 @@
         role_id: 1
         role_ids: 
         - 1
-        updated_at: 2007-03-19 00:23:15 +11:00
+        updated_at: 2007-03-29 22:10:30 +10:00
       :menu: !ruby/object:Goldberg::Menu 
         by_id: 
           1: &id003 !ruby/object:Goldberg::Menu::Node 
@@ -126,7 +126,7 @@
 - !ruby/object:Goldberg::Role 
   attributes: 
     name: Member
-    updated_at: 2007-03-19 00:23:16
+    updated_at: 2007-03-29 22:10:31
     cache: |
       --- 
       :credentials: !ruby/object:Goldberg::Credentials 
@@ -192,7 +192,7 @@
         role_ids: 
         - 2
         - 1
-        updated_at: 2007-03-19 00:23:16 +11:00
+        updated_at: 2007-03-29 22:10:31 +10:00
       :menu: !ruby/object:Goldberg::Menu 
         by_id: 
           1: &id003 !ruby/object:Goldberg::Menu::Node 
@@ -252,7 +252,7 @@
 - !ruby/object:Goldberg::Role 
   attributes: 
     name: Administrator
-    updated_at: 2007-03-19 00:23:16
+    updated_at: 2007-03-29 22:10:31
     cache: |
       --- 
       :credentials: !ruby/object:Goldberg::Credentials 
@@ -321,7 +321,7 @@
         - 3
         - 2
         - 1
-        updated_at: 2007-03-19 00:23:16 +11:00
+        updated_at: 2007-03-29 22:10:31 +10:00
       :menu: !ruby/object:Goldberg::Menu 
         by_id: 
           5: &id007 !ruby/object:Goldberg::Menu::Node 

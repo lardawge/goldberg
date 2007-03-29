@@ -10,7 +10,14 @@ namespace :goldberg do
 
   desc "PluginAWeek migrations"
   task :plugin_migrations => :environment do
-    PluginAWeek::PluginMigrations.migrate_plugins
+    begin
+      # Try running plugin_migrations from the Gem...
+      PluginAWeek::PluginMigrations.migrate_plugins
+    rescue
+      # ...but if that doesn't work, it might be installed from SVN as
+      # a plugin.  Try running it as a task.
+      Rake::Task['db:migrate:plugins'].invoke
+    end
   end
   
   desc "Load standard Goldberg tables from files in db/"

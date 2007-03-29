@@ -3,7 +3,7 @@
   attributes: 
     markup_style_id: "1"
     name: home
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Home Page
     permission_id: "3"
     id: "1"
@@ -18,6 +18,7 @@
       
       At the login prompt, enter an administrator username and password.  The top menu should change: a new item called "Administration" will appear.  Go there for further details.
 
+    markup_style: Textile
     content_cache: |-
       <h1>Welcome to Goldberg!</h1>
       
@@ -37,7 +38,7 @@
   attributes: 
     markup_style_id: "1"
     name: expired
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Session Expired
     permission_id: "3"
     id: "2"
@@ -48,6 +49,7 @@
       
       To continue please login again.
 
+    markup_style: Textile
     content_cache: |-
       <h1>Session Expired</h1>
       
@@ -61,7 +63,7 @@
   attributes: 
     markup_style_id: "1"
     name: notfound
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Not Found!
     permission_id: "3"
     id: "3"
@@ -71,6 +73,7 @@
       The page you requested was not found!
       
       Please contact your system administrator.
+    markup_style: Textile
     content_cache: |-
       <h1>Not Found</h1>
       
@@ -84,7 +87,7 @@
   attributes: 
     markup_style_id: "1"
     name: denied
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Permission Denied!
     permission_id: "3"
     id: "4"
@@ -94,6 +97,7 @@
       Sorry, but you don't have permission to view that page.
       
       Please contact your system administrator.
+    markup_style: Textile
     content_cache: |-
       <h1>Permission Denied</h1>
       
@@ -107,7 +111,7 @@
   attributes: 
     markup_style_id: "1"
     name: contact_us
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Contact Us
     permission_id: "3"
     id: "6"
@@ -116,6 +120,7 @@
       
       Visit the Goldberg Project Homepage at "http://goldberg.rubyforge.org":http://goldberg.rubyforge.org for further information on Goldberg.  Visit the Goldberg RubyForge Project Info Page at "http://rubyforge.org/projects/goldberg":http://rubyforge.org/projects/goldberg to access the project's files and development information.
 
+    markup_style: Textile
     content_cache: |-
       <h1>Contact Us</h1>
       
@@ -126,7 +131,7 @@
   attributes: 
     markup_style_id: "1"
     name: site_admin
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Site Administration
     permission_id: "1"
     id: "8"
@@ -182,6 +187,7 @@
       
       Go here to view and edit the settings that determine how Goldberg operates.
 
+    markup_style: Textile
     content_cache: |-
       <h1>Goldberg Setup</h1>
       
@@ -265,7 +271,7 @@
   attributes: 
     markup_style_id: "1"
     name: admin
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:28
     title: Administration
     permission_id: "1"
     id: "9"
@@ -278,6 +284,7 @@
       
       You can add more menu items here to administer your application if you want, by going to "Setup, Menu Editor":/menu/setup/menus.
 
+    markup_style: Textile
     content_cache: |-
       <h1>Site Administration</h1>
       
@@ -294,7 +301,7 @@
   attributes: 
     markup_style_id: "1"
     name: credits
-    updated_at: 2007-03-17 18:03:51
+    updated_at: 2007-03-29 22:37:29
     title: Credits and Licence
     permission_id: "3"
     id: "10"
@@ -355,6 +362,7 @@
       Goldberg's implementation of tabbed panels was adapted from 
       "InternetConnection":http://support.internetconnection.net/CODE_LIBRARY/Javascript_Show_Hide.shtml.
 
+    markup_style: Textile
     content_cache: |-
       <h1>Credits and Licence</h1>
       

@@ -18,11 +18,6 @@ Role</label><br/>
 <p><label for="system_settings_session_timeout">Session timeout</label><br/>
 <%= text_field 'system_settings', 'session_timeout'  %></p>
 
-<p><label for="system_settings_default_markup_style_id"> Default
-Markup Style</label><br/>
-<%= collection_select :system_settings, :default_markup_style_id,
-    @markup_styles, :id, :name %></p>
-
 <p><label for="system_settings_site_default_page_id"> Default Page
 </label><br/>
 <%= collection_select :system_settings, :site_default_page_id,

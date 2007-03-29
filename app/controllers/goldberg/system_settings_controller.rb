@@ -72,8 +72,6 @@ module Goldberg
       @self_reg_roles = @roles.clone
       @self_reg_roles.unshift Role.new(:id => nil, :name => '(none)')
       @pages = ContentPage.find(:all, :order => 'name')
-      @markup_styles = MarkupStyle.find(:all, :order => 'name')
-      @markup_styles.unshift MarkupStyle.new(:id => nil, :name => '(none)')
     end
 
   end
