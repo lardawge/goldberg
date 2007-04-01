@@ -46,7 +46,7 @@ module Goldberg
 
           respond_to do |wants|
             wants.html do
-              redirect_to "/"
+              redirect_to user.get_start_path
             end
             wants.xml do
               render :nothing => true, :status => 200
@@ -72,7 +72,7 @@ module Goldberg
       if request.post?
         self.class.logout(session)
       end
-      redirect_to '/'
+      redirect_to Goldberg.settings.public_role.get_start_path
     end
 
     

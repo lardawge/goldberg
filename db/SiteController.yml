@@ -19,12 +19,6 @@
     builtin: "1"
 - !ruby/object:Goldberg::SiteController 
   attributes: 
-    name: goldberg/markup_styles
-    permission_id: "1"
-    id: "4"
-    builtin: "1"
-- !ruby/object:Goldberg::SiteController 
-  attributes: 
     name: goldberg/menu_items
     permission_id: "1"
     id: "5"

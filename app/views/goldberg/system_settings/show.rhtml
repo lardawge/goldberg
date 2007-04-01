@@ -113,6 +113,25 @@ this site (e.g. for links in self-registration emails). </p>
 </td></tr>
 
 <tr class="settings_row">
+<th>Default Start Path</th><td><%=h @system_settings.start_path %></td>
+<tr><td colspan=2>
+<div class="guidance_text">
+<p> When users log in they will be redirected to this path by
+default. If not specified, the default is "/".</p>
+
+<p> Both Roles and Users can override this setting.  A User setting
+for start path takes the highest precedence, then Role, then
+SystemSettings (here).  When Users log out of the site they are
+redirected to the start path for the public Role (as defined
+above).</p>
+
+<p> It's up to the site administrator to ensure that Users have
+permission to view their start page.  If not, the User will get a
+"Permission denied" error as per normal.</p>
+</div>
+</td></tr>
+
+<tr class="settings_row">
 <th> Self-registration enabled </th><td><%=h @system_settings.self_reg_enabled %></td>
 <tr><td colspan=2>
 <div class="guidance_text">

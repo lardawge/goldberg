@@ -2,6 +2,7 @@
 - !ruby/object:Goldberg::SystemSettings 
   attributes: 
     session_expired_page_id: "2"
+    start_path: ""
     session_timeout: "7200"
     self_reg_enabled: "0"
     menu_depth: "3"
@@ -17,5 +18,5 @@
     public_role_id: "1"
     footer_message: A <a href="http://goldberg.rubyforge.org">Goldberg</a> site
     site_name: Goldberg
-    self_reg_confirmation_error_page_id: "6"
+    self_reg_confirmation_error_page_id: "11"
     site_subtitle: A website development tool for Ruby on Rails

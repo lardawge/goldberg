@@ -3,6 +3,7 @@
   attributes: 
     name: admin
     password_expired: 
+    start_path: 
     self_reg_confirmation_required: 
     fullname: 
     password_salt: 

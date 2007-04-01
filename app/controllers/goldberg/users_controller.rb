@@ -15,7 +15,9 @@ module Goldberg
     end
     before_filter :foreign, :only => [:new, :create, :edit, :update]
     before_filter :enable_self_reg, :only => [:self_show, :self_register, :self_create,
-                                              :self_edit, :self_update]
+                                              :self_edit, :self_update,
+                                              :confirm_registration,
+                                              :confirm_registration_submit]
     before_filter :enable_delegate_reg, :only => [:delegate_list, :delegate_show,
                                                   :delegate_register, :delegate_create,
                                                   :delegate_edit, :delegate_update,
@@ -67,6 +69,16 @@ module Goldberg
     alias_method :delegate_register, :new
     
     def create
+      # If something goes wrong, this is the return action.
+      case params[:action]
+      when 'self_create'
+        new_action = 'self_register'
+      when 'delegate_create'
+        new_action = 'delegate_register'
+      else
+        new_action = 'new'
+      end
+      
       @user = User.new(params[:user])
       if @self_reg
         @user.role_id = Goldberg.settings.self_reg_role_id
@@ -75,7 +87,7 @@ module Goldberg
         if Goldberg.settings.self_reg_send_confirmation_email
           if not @user.email_valid?
             flash[:error] = 'A valid email address is required!'
-            render :action => 'new'
+            render :action => new_action
             return
           end
         end
@@ -84,7 +96,7 @@ module Goldberg
       if params[:user][:clear_password].length == 0 or
           params[:user][:confirm_password] != params[:user][:clear_password]
         flash[:error] = 'Password invalid!'
-        render :action => 'new'
+        render :action => new_action
       else
         if @user.save
           flash[:notice] = 'User was successfully created.'
@@ -103,7 +115,7 @@ module Goldberg
             redirect_to :action => 'list'
           end
         else
-          render :action => 'new'
+          render :action => new_action
         end
       end
     end
@@ -162,6 +174,16 @@ module Goldberg
     alias_method :delegate_edit, :edit
     
     def update
+      # If something goes wrong, this is the return action.
+      case params[:action]
+      when 'self_update'
+        edit_action = 'self_register'
+      when 'delegate_update'
+        edit_action = 'delegate_edit'
+      else
+        edit_action = 'edit'
+      end
+      
       if @self_reg
         @user = Goldberg.user
       else
@@ -181,13 +203,13 @@ module Goldberg
             params[:user][:clear_password].length > 0 and
             params[:user][:confirm_password] != params[:user][:clear_password]
           flash[:error] = 'Password invalid!'
-          render :action => 'edit'
+          render :action => edit_action
         else
           if @user.update_attributes(params[:user])
             flash[:notice] = 'User was successfully updated.'
             redirect_to :action => 'show', :id => @user
           else
-            render :action => 'edit'
+            render :action => edit_action
           end
         end
       end  # if @user

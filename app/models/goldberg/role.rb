@@ -56,5 +56,13 @@ module Goldberg
       return parents
     end
 
+    def get_start_path
+      if self.start_path and self.start_path.length > 0
+        self.start_path
+      else
+        Goldberg.settings.get_start_path
+      end
+    end
+    
   end
 end

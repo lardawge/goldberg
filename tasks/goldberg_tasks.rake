@@ -42,15 +42,41 @@ namespace :goldberg do
     
     puts "Deleting any ActiveRecord sessions, and resetting the Role cache"
     conn = ActiveRecord::Base.connection
-    
     begin  # Capture error if sessions table doesn't exist
       conn.execute "delete from sessions"
+    rescue
+      nil
     end
-    conn.execute "update roles set cache = NULL"
+    # conn.execute "update roles set cache = NULL"
+    Goldberg::Role.rebuild_cache
   end
 
   desc "Upgrade a legacy Goldberg database to the latest version"
-  task :upgrade => [:flush, 'db:migrate'] do
+  task :upgrade => [:install, :flush] do
+    # Prefix all the builtin controllers with 'goldberg/'
+    controllers = Goldberg::SiteController.find :all
+    controllers.each do |c|
+      if c.builtin == 1 and not (c.name =~ /^goldberg/)
+        c.name = 'goldberg/' + c.name
+        c.save
+      end
+    end
+
+    # Convert all the numeric markup styles to the new text format.
+    pages = Goldberg::ContentPage.find :all
+    pages.each do |p|
+      case p.markup_style_id
+      when 1
+        p.markup_style = 'Textile'
+      when 2
+        p.markup_style = 'Markdown'
+      end
+      p.save
+    end
+
+    # Rebuild role caches
+    Goldberg::Role.rebuild_cache
+
   end
 
 end

@@ -38,18 +38,6 @@ END
       @public_role ||= Role.find(self.public_role_id)
     end
     
-    def default_markup_style
-      if not @default_markup_style
-        if self.default_markup_style_id
-          @default_markup_style = MarkupStyle.find(self.default_markup_style_id)
-        else
-          @default_markup_style = MarkupStyle.new(:id => nil, 
-                                                  :name => '(None)')
-        end
-      end
-      return @default_markup_style
-    end
-    
     def site_default_page
       @site_default_page ||= ContentPage.find(self.site_default_page_id)
     end
@@ -91,6 +79,14 @@ END
       end
     end
 
+    def get_start_path
+      if self.start_path and self.start_path.length > 0
+        self.start_path
+      else
+        "/"
+      end
+    end
+    
     def self_reg_role
       @self_reg_role ||= self.self_reg_role_id ? Role.find(self.self_reg_role_id) :
         Role.new(:id => nil, :name => '(none)')

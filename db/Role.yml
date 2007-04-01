@@ -2,7 +2,8 @@
 - !ruby/object:Goldberg::Role 
   attributes: 
     name: Public
-    updated_at: 2007-03-29 22:10:31
+    updated_at: 2007-04-01 10:37:43
+    start_path: 
     cache: |
       --- 
       :credentials: !ruby/object:Goldberg::Credentials 
@@ -46,7 +47,6 @@
           goldberg/system_settings: false
           goldberg/roles: false
           goldberg/permissions: false
-          goldberg/markup_styles: false
           goldberg/content_pages: false
           goldberg/auth: false
           goldberg/users: false
@@ -55,6 +55,7 @@
           admin: false
           notfound: true
           site_admin: false
+          unconfirmed: true
           contact_us: true
           credits: true
           denied: true
@@ -66,7 +67,7 @@
         role_id: 1
         role_ids: 
         - 1
-        updated_at: 2007-03-29 22:10:30 +10:00
+        updated_at: 2007-04-01 10:37:43 +10:00
       :menu: !ruby/object:Goldberg::Menu 
         by_id: 
           1: &id003 !ruby/object:Goldberg::Menu::Node 
@@ -126,7 +127,8 @@
 - !ruby/object:Goldberg::Role 
   attributes: 
     name: Member
-    updated_at: 2007-03-29 22:10:31
+    updated_at: 2007-04-01 10:37:43
+    start_path: 
     cache: |
       --- 
       :credentials: !ruby/object:Goldberg::Credentials 
@@ -170,7 +172,6 @@
           goldberg/system_settings: false
           goldberg/roles: false
           goldberg/permissions: false
-          goldberg/markup_styles: false
           goldberg/content_pages: false
           goldberg/auth: false
           goldberg/users: false
@@ -179,6 +180,7 @@
           admin: false
           notfound: true
           site_admin: false
+          unconfirmed: true
           contact_us: true
           credits: true
           denied: true
@@ -192,7 +194,7 @@
         role_ids: 
         - 2
         - 1
-        updated_at: 2007-03-29 22:10:31 +10:00
+        updated_at: 2007-04-01 10:37:43 +10:00
       :menu: !ruby/object:Goldberg::Menu 
         by_id: 
           1: &id003 !ruby/object:Goldberg::Menu::Node 
@@ -252,7 +254,8 @@
 - !ruby/object:Goldberg::Role 
   attributes: 
     name: Administrator
-    updated_at: 2007-03-29 22:10:31
+    updated_at: 2007-04-01 10:37:44
+    start_path: /menu/admin
     cache: |
       --- 
       :credentials: !ruby/object:Goldberg::Credentials 
@@ -296,7 +299,6 @@
           goldberg/system_settings: true
           goldberg/roles: true
           goldberg/permissions: true
-          goldberg/markup_styles: true
           goldberg/content_pages: true
           goldberg/auth: true
           goldberg/users: true
@@ -305,6 +307,7 @@
           admin: true
           notfound: true
           site_admin: true
+          unconfirmed: true
           contact_us: true
           credits: true
           denied: true
@@ -321,7 +324,7 @@
         - 3
         - 2
         - 1
-        updated_at: 2007-03-29 22:10:31 +10:00
+        updated_at: 2007-04-01 10:37:43 +10:00
       :menu: !ruby/object:Goldberg::Menu 
         by_id: 
           5: &id007 !ruby/object:Goldberg::Menu::Node 

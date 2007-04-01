@@ -22,6 +22,11 @@
 <th> Role </th>
 <td> <%= collection_select 'user', 'role_id', @roles, :id, :name %> </td>
 </tr>
+
+<tr>
+<th> Start Path </th>
+<td><%= text_field 'user', 'start_path' %></td>
+</tr>
 <% end -%>
 
 <% if @password_change -%>

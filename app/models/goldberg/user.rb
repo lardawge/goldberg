@@ -49,6 +49,14 @@ module Goldberg
         self.email =~ /\A.+@[^\.].*\.[a-z]{2,}\z/
     end
 
+    def get_start_path
+      if self.start_path and self.start_path.length > 0
+        self.start_path
+      else
+        self.role.get_start_path
+      end
+    end
+
     class << self
       def random_password
         letters = ('A' .. 'Z').to_a + ('a' .. 'z').to_a

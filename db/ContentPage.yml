@@ -3,7 +3,7 @@
   attributes: 
     markup_style_id: "1"
     name: home
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Home Page
     permission_id: "3"
     id: "1"
@@ -38,7 +38,7 @@
   attributes: 
     markup_style_id: "1"
     name: expired
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Session Expired
     permission_id: "3"
     id: "2"
@@ -63,7 +63,7 @@
   attributes: 
     markup_style_id: "1"
     name: notfound
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Not Found!
     permission_id: "3"
     id: "3"
@@ -87,7 +87,7 @@
   attributes: 
     markup_style_id: "1"
     name: denied
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Permission Denied!
     permission_id: "3"
     id: "4"
@@ -111,7 +111,7 @@
   attributes: 
     markup_style_id: "1"
     name: contact_us
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Contact Us
     permission_id: "3"
     id: "6"
@@ -131,7 +131,7 @@
   attributes: 
     markup_style_id: "1"
     name: site_admin
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Site Administration
     permission_id: "1"
     id: "8"
@@ -271,7 +271,7 @@
   attributes: 
     markup_style_id: "1"
     name: admin
-    updated_at: 2007-03-29 22:37:28
+    updated_at: 2007-04-01 09:40:33
     title: Administration
     permission_id: "1"
     id: "9"
@@ -301,7 +301,7 @@
   attributes: 
     markup_style_id: "1"
     name: credits
-    updated_at: 2007-03-29 22:37:29
+    updated_at: 2007-04-01 09:40:33
     title: Credits and Licence
     permission_id: "3"
     id: "10"
@@ -439,3 +439,28 @@
       	<p>Goldberg&#8217;s implementation of tabbed panels was adapted from 
       <a href="http://support.internetconnection.net/CODE_LIBRARY/Javascript_Show_Hide.shtml">InternetConnection</a>.</p>
     created_at: 2006-10-02 10:35:35
+- !ruby/object:Goldberg::ContentPage 
+  attributes: 
+    markup_style_id: 
+    name: unconfirmed
+    updated_at: 2007-04-01 10:37:42
+    title: Not Permitted
+    permission_id: "3"
+    id: "11"
+    content: |
+      h1. Not Permitted
+      
+      Sorry, but you are not allowed to log into the site until your registration has been confirmed.
+      
+      If there is an issue please contact the system administrator.
+
+    markup_style: Textile
+    content_cache: |-
+      <h1>Not Permitted</h1>
+      
+      
+      	<p>Sorry, but you are not allowed to log into the site until your registration has been confirmed.</p>
+      
+      
+      	<p>If there is an issue please contact the system administrator.</p>
+    created_at: 2007-04-01 10:37:42
