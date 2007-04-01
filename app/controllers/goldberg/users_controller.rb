@@ -13,7 +13,10 @@ module Goldberg
       @delegate_reg = false
       true  # proceed...
     end
-    before_filter :foreign, :only => [:new, :create, :edit, :update]
+    before_filter :foreign, :only => [:new,    :delegate_register,
+                                      :create, :delegate_create,
+                                      :edit,   :delegate_edit,
+                                      :update, :delegate_update]
     before_filter :enable_self_reg, :only => [:self_show, :self_register, :self_create,
                                               :self_edit, :self_update,
                                               :confirm_registration,
@@ -69,16 +72,6 @@ module Goldberg
     alias_method :delegate_register, :new
     
     def create
-      # If something goes wrong, this is the return action.
-      case params[:action]
-      when 'self_create'
-        new_action = 'self_register'
-      when 'delegate_create'
-        new_action = 'delegate_register'
-      else
-        new_action = 'new'
-      end
-      
       @user = User.new(params[:user])
       if @self_reg
         @user.role_id = Goldberg.settings.self_reg_role_id
@@ -86,8 +79,8 @@ module Goldberg
           Goldberg.settings.self_reg_confirmation_required
         if Goldberg.settings.self_reg_send_confirmation_email
           if not @user.email_valid?
-            flash[:error] = 'A valid email address is required!'
-            render :action => new_action
+            flash.now[:error] = 'A valid email address is required!'
+            render :action => 'new'
             return
           end
         end
@@ -95,11 +88,11 @@ module Goldberg
       
       if params[:user][:clear_password].length == 0 or
           params[:user][:confirm_password] != params[:user][:clear_password]
-        flash[:error] = 'Password invalid!'
-        render :action => new_action
+        flash.now[:error] = 'Password invalid!'
+        render :action => 'new'
       else
         if @user.save
-          flash[:notice] = 'User was successfully created.'
+          flash.now[:notice] = 'User was successfully created.'
           if @self_reg
             if Goldberg.settings.self_reg_confirmation_required
               if Goldberg.settings.self_reg_send_confirmation_email
@@ -115,7 +108,7 @@ module Goldberg
             redirect_to :action => 'list'
           end
         else
-          render :action => new_action
+          render :action => 'new'
         end
       end
     end
@@ -127,7 +120,7 @@ module Goldberg
     # and password.
     def confirm_registration
       @user = User.find_by_confirmation_key(params[:id])
-      @user or flash[:error] = 'Sorry, but there is no such confirmation required.'
+      @user or flash.now[:error] = 'Sorry, but there is no such confirmation required.'
       render :action => 'confirm_registration'
     end
 
@@ -142,15 +135,15 @@ module Goldberg
         @user.self_reg_confirmation_required = false
         @user.confirmation_key = nil
         if @user.save
-          flash[:notice] = 'Registration confirmed.'
+          flash.now[:notice] = 'Registration confirmed.'
           AuthController.set_user(session, @user.id)
           render :action => 'confirm_registration_submit'
         else
-          flash[:error] = 'Could not save confirmation!'
+          flash.now[:error] = 'Could not save confirmation!'
           render :action => 'confirm_registration'
         end
       else
-        flash[:error] = 'Self-registration confirmation invalid!'
+        flash.now[:error] = 'Self-registration confirmation invalid!'
         render :action => 'confirm_registration'
       end
     end
@@ -174,16 +167,6 @@ module Goldberg
     alias_method :delegate_edit, :edit
     
     def update
-      # If something goes wrong, this is the return action.
-      case params[:action]
-      when 'self_update'
-        edit_action = 'self_register'
-      when 'delegate_update'
-        edit_action = 'delegate_edit'
-      else
-        edit_action = 'edit'
-      end
-      
       if @self_reg
         @user = Goldberg.user
       else
@@ -202,14 +185,14 @@ module Goldberg
         if params[:user][:clear_password] and
             params[:user][:clear_password].length > 0 and
             params[:user][:confirm_password] != params[:user][:clear_password]
-          flash[:error] = 'Password invalid!'
-          render :action => edit_action
+          flash.now[:error] = 'Password invalid!'
+          render :action => 'edit'
         else
           if @user.update_attributes(params[:user])
-            flash[:notice] = 'User was successfully updated.'
+            flash.now[:notice] = 'User was successfully updated.'
             redirect_to :action => 'show', :id => @user
           else
-            render :action => edit_action
+            render :action => 'edit'
           end
         end
       end  # if @user
@@ -242,11 +225,11 @@ module Goldberg
             render :action => 'forgot_password'
           end
         else
-          flash[:error] = "You can't reset your password because your account is not yet confirmed."
+          flash.now[:error] = "You can't reset your password because your account is not yet confirmed."
           render :action => 'forgot_password'
         end
       else
-        flash[:error] = "No such user/email."
+        flash.now[:error] = "No such user/email."
         render :action => 'forgot_password'
       end
     end
@@ -258,7 +241,7 @@ module Goldberg
       if @user
         render :action => 'reset_password'
       else
-        flash[:error] = 'Sorry, but we received no such password reset request.'
+        flash.now[:error] = 'Sorry, but we received no such password reset request.'
         render :action => 'forgot_password'
       end
     end
@@ -280,11 +263,11 @@ module Goldberg
             render :action => 'reset_password'
           end
         else
-          flash[:error] = "You can't reset your password because your account is not yet confirmed."
+          flash.now[:error] = "You can't reset your password because your account is not yet confirmed."
           render :action => 'forgot_password'
         end
       else
-        flash[:error] = "No such password reset request for user."
+        flash.now[:error] = "No such password reset request for user."
         render :action => 'forgot_password'
       end
     end
