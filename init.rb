@@ -8,18 +8,6 @@ Dependencies.load_paths += [ controller_path, model_path, helper_path ]
 config.controller_paths << controller_path
 
 # Goldberg's libraries
-require 'goldberg'
-require 'goldberg_filters'
-require 'goldberg_helper'
-require 'goldberg_routes'
-require 'goldberg_controller'
-require 'goldberg_model'
-require 'goldberg_migration'
-
-# Load Plugin Migrations (if available)
-begin
-  require 'plugin_migrations'
-rescue MissingSourceFile
-  nil
+Dir["#{File.dirname(__FILE__)}/lib/*.rb"].each do |lib|
+  require lib
 end
-

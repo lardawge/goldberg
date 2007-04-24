@@ -46,7 +46,13 @@ module Goldberg
 
           respond_to do |wants|
             wants.html do
-              redirect_to user.get_start_path
+              if session[:pending_request]
+                pending = session[:pending_request]
+                session[:pending_request] = nil
+                redirect_to pending
+              else
+                redirect_to user.get_start_path
+              end
             end
             wants.xml do
               render :nothing => true, :status => 200

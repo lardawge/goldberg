@@ -11,11 +11,18 @@ namespace :goldberg do
   desc "PluginAWeek migrations"
   task :plugin_migrations => :environment do
     begin
-      # Try running plugin_migrations from the Gem...
-      PluginAWeek::PluginMigrations.migrate_plugins
-    rescue
-      # ...but if that doesn't work, it might be installed from SVN as
-      # a plugin.  Try running it as a task.
+      # Try running plugin_migrations from the plugin gem...
+      require 'plugin_migrations'
+      # If plugin_migrations is loaded too late, Goldberg may have
+      # been missed.  If so, add it manually.
+      (Rails.plugins.find do |p| p.name == 'goldberg' end) ||
+        Rails.plugins << Plugin.new("#{RAILS_ROOT}/vendor/plugins/goldberg")
+      # Migrate plugins
+      PluginAWeek::PluginMigrations.migrate
+    rescue MissingSourceFile
+      # ...but if the gem isn't found, plugin_migrations might be
+      # installed directly in vendor/plugins.  Try running the rake
+      # task.
       Rake::Task['db:migrate:plugins'].invoke
     end
   end

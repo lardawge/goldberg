@@ -22,7 +22,8 @@ module GoldbergModel
         @prefix
       end
       
-      set_table_name "#{self.prefix}#{self.table_name}"
+      (table_name =~ /goldberg/) ||
+        (set_table_name "#{self.prefix}#{self.table_name}")
     end
   end
 

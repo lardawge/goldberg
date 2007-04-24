@@ -18,6 +18,7 @@ module GoldbergFilters
   
   def goldberg_security_up
     if Goldberg.settings
+      Goldberg.clear!
       Goldberg::AuthController.set_user(session)
 
       # Perform some preliminary checks for logged-in users.
@@ -104,7 +105,12 @@ module GoldbergFilters
       if not authorised
         respond_to do |format|
           format.html do
-            redirect_to Goldberg.settings.permission_denied_page.url
+            if Goldberg.user
+              redirect_to Goldberg.settings.permission_denied_page.url
+            else
+              session[:pending_request] = params
+              redirect_to :controller => 'goldberg/auth', :action => 'login'
+            end
           end
           format.js do
             render :status => 400, :text => Goldberg.settings.permission_denied_page.content_html
@@ -122,10 +128,6 @@ module GoldbergFilters
     return true
   end
 
-
-  def goldberg_security_down
-    Goldberg.clear!
-  end
 
   protected
 
@@ -148,5 +150,4 @@ end
 ActionController::Base.class_eval do
   include GoldbergFilters
   prepend_before_filter :goldberg_security_up
-  append_after_filter :goldberg_security_down
 end
