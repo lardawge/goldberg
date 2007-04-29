@@ -2,7 +2,7 @@ module Goldberg
   class SiteController < ActiveRecord::Base
     include GoldbergModel
     
-    validates_presence_of :name
+    validates_presence_of :name, :permission_id
     validates_uniqueness_of :name
     attr_accessor :permission
 
@@ -19,14 +19,6 @@ module Goldberg
     end
     
     def self.classes
-      #     for file in Dir.glob("#{RAILS_ROOT}/app/controllers/*.rb") do
-      #       begin
-      #         load file
-#       rescue
-      #         logger.info "Couldn't load file '#{file}' (already loaded?)"
-      #       end
-      #     end
-      
       for path in ActionController::Routing.controller_paths do
         self.load_class_files(path)
       end  

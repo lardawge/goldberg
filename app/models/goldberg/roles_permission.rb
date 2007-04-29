@@ -1,6 +1,8 @@
 module Goldberg
   class RolesPermission < ActiveRecord::Base
     include GoldbergModel
+
+    validates_presence_of :role_id, :permission_id
     
     def RolesPermission.find_for_role(role_ids)
       querystr = <<-END

@@ -53,6 +53,11 @@ END
     def session_expired_page
       @session_expired_page ||= ContentPage.find(self.session_expired_page_id)
     end
+
+    def self_reg_confirmation_error_page
+      @self_reg_confirmation_error_page ||=
+        ContentPage.find(self.self_reg_confirmation_error_page_id)
+    end
     
     # Returns an array of system page settings for a given page,
     # or nil if the page is not a system page.
@@ -70,6 +75,10 @@ END
       end
       if self.session_expired_page_id == pageid
         pages << "Session expired page"
+      end
+
+      if self.self_reg_confirmation_error_page_id == pageid
+        pages << "Self-registration confirmation error page"
       end
       
       if pages.length > 0

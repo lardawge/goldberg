@@ -6,7 +6,7 @@ module Goldberg
   class ContentPage < ActiveRecord::Base
     include GoldbergModel
   
-    validates_presence_of :name
+    validates_presence_of :name, :title, :permission_id
     validates_uniqueness_of :name
     attr_accessor :content_html
 
@@ -25,7 +25,7 @@ module Goldberg
           begin
             RedCloth
             @markup_styles += ['Textile', 'Markdown']
-          rescue
+          rescue MissingSourceFile
             nil
           end
         end
@@ -80,14 +80,6 @@ module Goldberg
       write_attribute(:content, new_content)
       self.content_cache = nil
     end
-
-
-#     def markup_style
-#       if not @markup_style and self.markup_style_id and self.markup_style_id > 0
-#         @markup_style = MarkupStyle.find(self.markup_style_id)
-#       end
-#       return @markup_style
-#     end
 
 
     def before_save

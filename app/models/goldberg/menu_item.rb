@@ -2,10 +2,10 @@ module Goldberg
   class MenuItem < ActiveRecord::Base
     include GoldbergModel
     
-    attr_accessor :controller_action, :content_page
-    
-    validates_presence_of :name
+    validates_presence_of :name, :label
     validates_uniqueness_of :name
+    
+    attr_accessor :controller_action, :content_page
     
     def above
       if self.parent_id

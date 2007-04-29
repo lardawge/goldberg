@@ -18,109 +18,31 @@ module GoldbergFilters
   
   def goldberg_security_up
     if Goldberg.settings
-      Goldberg.clear!
-      Goldberg::AuthController.set_user(session)
 
+      set_user or return false
+      
       # Perform some preliminary checks for logged-in users.
-      # if Goldberg.credentials.role_id != Goldberg.settings.public_role_id
       if Goldberg.user
-        # If self-registration is active, check that the user is not
-        # pending confirmation.  Otherwise they are kicked out.
-        if Goldberg.settings.self_reg_enabled and
-            Goldberg.user.self_reg_confirmation_required 
-          logger.info "User not confirmed"
-          Goldberg::AuthController.logout(session)
-          respond_to do |format|
-            format.html do
-              redirect_to Goldberg.settings.self_reg_confirmation_error_page.url
-            end
-            format.js do
-              render :status => 400, :text =>
-                Goldberg.settings.self_reg_confirmation_error_page.content_html
-            end
-            format.xml do
-              render :status => 400, :xml =>
-                error_xml(*ERROR_SELF_REG_CONFIRMATION_REQUIRED)
-            end
-          end
-          return false
-        end
-
+        # Check that the user is not pending registration confirmation.
+        check_not_pending or return false
         # If the user's session has expired, kick out the user.
-        if Goldberg.settings.session_timeout > 0 and session[:last_time]
-          if (Time.now - session[:last_time]) > Goldberg.settings.session_timeout
-            logger.info "Session: time expired"
-            Goldberg::AuthController.logout(session)
-            respond_to do |format|
-              format.html do
-                redirect_to Goldberg.settings.session_expired_page.url
-              end
-              format.js do
-                render :status => 400, :text =>
-                  Goldberg.settings.session_expired_page.content_html
-              end
-              format.xml do
-                render :status => 400, :xml =>
-                  error_xml(*ERROR_SESSION_EXPIRED)
-              end
-            end
-            return false
-          else
-            logger.info "Session: time NOT expired"
-          end
-        end
+        check_not_expired or return false
       end
       
+      # The default is false.  check_page_exists() will set this to true if the current request is for a ContentPage.
+      @is_page_request = false
+
       # If this is a page request check that it exists, and if not
-      # redirect to the "unknown" page
-      is_page_request = false
-      if params[:controller] == 'goldberg/content_pages' and
-          params[:action] == 'view'
-        is_page_request = true
-        if not Goldberg.credentials.pages.has_key?(params[:page_name].to_s)
-          logger.warn "(Unknown page? #{params[:page_name].to_s})"
-          respond_to do |format|
-            format.html do
-              redirect_to Goldberg.settings.not_found_page.url
-            end
-            format.js do
-              render :status => 404, :text => Goldberg.settings.not_found_page.content_html
-            end
-            format.xml  do
-              render :status => 404, :xml => error_xml(*ERROR_NOT_FOUND)
-            end
-          end
-          return false
-        end
-      end
+      # redirect to the "unknown" page.
+      check_page_exists or return false
       
-      # PERMISSIONS
+
+      # The default is false. check_permissions() will set this to true if the user is authorised for the current action.
+      @authorised = false
+      
       # Check whether the user is authorised for this page or action.
-      if is_page_request
-        authorised = Goldberg.credentials.page_authorised?(params[:page_name].to_s)
-      else
-        authorised = Goldberg.credentials.action_authorised?(params[:controller],
-                                                              params[:action])
-      end
-      if not authorised
-        respond_to do |format|
-          format.html do
-            if Goldberg.user
-              redirect_to Goldberg.settings.permission_denied_page.url
-            else
-              session[:pending_request] = params
-              redirect_to :controller => 'goldberg/auth', :action => 'login'
-            end
-          end
-          format.js do
-            render :status => 400, :text => Goldberg.settings.permission_denied_page.content_html
-          end
-          format.xml  do
-            render :status => 400, :xml => error_xml(*ERROR_PERMISSION_DENIED)
-          end
-        end
-        return false
-      end
+      check_permissions or return false
+      
     end  # if Goldberg.settings
     
     session[:last_time] = Time.now
@@ -131,6 +53,117 @@ module GoldbergFilters
 
   protected
 
+  def set_user
+    Goldberg.clear!
+    Goldberg::AuthController.set_user(session)
+    return true
+  end
+
+  def check_not_pending
+    if Goldberg.settings.self_reg_enabled and
+        Goldberg.user.self_reg_confirmation_required 
+      logger.info "User not confirmed"
+      Goldberg::AuthController.logout(session)
+      respond_to do |format|
+        format.html do
+          redirect_to Goldberg.settings.self_reg_confirmation_error_page.url
+        end
+        format.js do
+          render :status => 400, :text =>
+            Goldberg.settings.self_reg_confirmation_error_page.content_html
+        end
+        format.xml do
+          render :status => 400, :xml =>
+            error_xml(*ERROR_SELF_REG_CONFIRMATION_REQUIRED)
+        end
+      end
+      return false
+    end
+
+    return true
+  end
+  
+  def check_not_expired
+    if Goldberg.settings.session_timeout > 0 and session[:last_time]
+      if (Time.now - session[:last_time]) > Goldberg.settings.session_timeout
+        logger.info "Session: time expired"
+        Goldberg::AuthController.logout(session)
+        respond_to do |format|
+          format.html do
+            redirect_to Goldberg.settings.session_expired_page.url
+          end
+          format.js do
+            render :status => 400, :text =>
+              Goldberg.settings.session_expired_page.content_html
+          end
+          format.xml do
+            render :status => 400, :xml =>
+              error_xml(*ERROR_SESSION_EXPIRED)
+          end
+        end
+        return false
+      else
+        logger.info "Session: time NOT expired"
+      end
+    end
+    
+    return true
+  end
+
+  def check_page_exists
+    if params[:controller] == 'goldberg/content_pages' and
+        params[:action] == 'view'
+      @is_page_request = true
+      if not Goldberg.credentials.pages.has_key?(params[:page_name].to_s)
+        logger.warn "(Unknown page? #{params[:page_name].to_s})"
+        respond_to do |format|
+          format.html do
+            redirect_to Goldberg.settings.not_found_page.url
+          end
+          format.js do
+            render :status => 404, :text => Goldberg.settings.not_found_page.content_html
+          end
+          format.xml  do
+            render :status => 404, :xml => error_xml(*ERROR_NOT_FOUND)
+          end
+        end
+        return false
+      end
+    end
+
+    return true
+  end
+
+  def check_permissions
+    if @is_page_request
+      @authorised = Goldberg.credentials.page_authorised?(params[:page_name].to_s)
+    else
+      @authorised = Goldberg.credentials.action_authorised?(params[:controller],
+                                                           params[:action])
+    end
+    if not @authorised
+      respond_to do |format|
+        format.html do
+          if Goldberg.user
+            redirect_to Goldberg.settings.permission_denied_page.url
+          else
+            session[:pending_request] = params
+            redirect_to :controller => 'goldberg/auth', :action => 'login'
+          end
+        end
+        format.js do
+          render :status => 400, :text => Goldberg.settings.permission_denied_page.content_html
+        end
+        format.xml  do
+          render :status => 400, :xml => error_xml(*ERROR_PERMISSION_DENIED)
+        end
+      end
+      return false
+    end
+    
+    return true
+  end
+  
   def error_xml(code, message)
     target = ''
     xml = Builder::XmlMarkup.new(:target => target)

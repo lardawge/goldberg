@@ -4,7 +4,7 @@ module Goldberg
   class User < ActiveRecord::Base
     include GoldbergModel
 
-    validates_presence_of :name
+    validates_presence_of :name, :role_id
     validates_uniqueness_of :name
     
     attr_accessor :clear_password

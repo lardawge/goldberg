@@ -2,7 +2,7 @@ module Goldberg
   class ControllerAction < ActiveRecord::Base
     include GoldbergModel
     
-    validates_presence_of :name
+    validates_presence_of :name, :site_controller_id
     validates_uniqueness_of :name, :scope => 'site_controller_id'
     
     attr_accessor :controller, :permission, :url, :allowed, :specific_name
@@ -40,6 +40,23 @@ module Goldberg
       return @url
     end
 
+    def menu_items
+      if self.id
+        MenuItem.find_all_by_controller_action_id(self.id, :order => 'label')
+      else
+        []
+      end
+    end
+
+    def before_destroy
+      if self.menu_items.length > 0
+        self.errors.add(:id, "Cannot delete an Action that is in the menu!")
+        return false
+      else
+        return true
+      end
+    end
+    
     def self.actions_allowed(permission_ids)
       # Hash for faster & easier lookups
       if permission_ids
