@@ -1,11 +1,8 @@
-
 namespace :goldberg do
 
   desc "Dump standard Goldberg tables to files in db/"
   task :dump_bootstrap => :environment do
-    goldberg_classes.each do |klass|
-      dump_for_class klass, "#{File.dirname(__FILE__)}/../db"
-    end
+    GoldbergMigration.dump_bootstrap
   end
 
   desc "PluginAWeek migrations"
@@ -29,9 +26,7 @@ namespace :goldberg do
   
   desc "Load standard Goldberg tables from files in db/"
   task :load_bootstrap => :plugin_migrations do
-    goldberg_classes.each do |klass|
-      load_for_class klass, "#{File.dirname(__FILE__)}/../db"
-    end
+    GoldbergMigration.load_bootstrap
   end
 
   desc "Install Goldberg"
@@ -83,42 +78,6 @@ namespace :goldberg do
 
     # Rebuild role caches
     Goldberg::Role.rebuild_cache
-
   end
 
 end
-
-
-def goldberg_classes
-  return [ Goldberg::Permission, Goldberg::SiteController, 
-           Goldberg::ContentPage, Goldberg::ControllerAction,
-           Goldberg::MenuItem, Goldberg::Role,
-           Goldberg::RolesPermission, Goldberg::SystemSettings,
-           Goldberg::User ]
-end
-
-def dump_for_class(klass, dest)
-  filename = "#{dest}/#{klass.to_s.sub(/^Goldberg::/, '')}.yml"
-  records = klass.find(:all)
-  File.open(filename, 'w') do |out|  
-    YAML.dump(records, out)
-  end
-end
-
-def load_for_class(klass, src)
-  filename = "#{src}/#{klass.to_s.sub(/^Goldberg::/, '')}.yml"
-  File.open(filename) do |src|
-    records = YAML::load(src)
-    records.each do |src_rec|
-      record = klass.new src_rec.attributes
-      record.id = src_rec.id
-      record.save or 
-        puts "#{klass.to_s} record #{record} not saved!"
-    end
-  end
-  # Reset table sequence if applicable (i.e. PostgreSQL)
-  if klass.connection.respond_to?(:reset_pk_sequence!)
-    klass.connection.reset_pk_sequence!(klass.table_name)
-  end
-end
-

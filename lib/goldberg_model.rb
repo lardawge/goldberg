@@ -26,7 +26,7 @@ module GoldbergModel
         (set_table_name "#{self.prefix}#{self.table_name}")
     end
   end
-
+  
 end
 
 
