@@ -18,6 +18,8 @@ module GoldbergFilters
   
   def goldberg_security_up
     if Goldberg.settings
+      session[:goldberg] ||= Hash.new
+      session[:goldberg][:path] = request.path
 
       set_user or return false
       

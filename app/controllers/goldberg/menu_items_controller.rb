@@ -151,6 +151,8 @@ module Goldberg
       node = Goldberg.menu.select(params[:name].to_s)
       if node
         session[:goldberg][:menu_item] = params[:name].to_s
+        session[:goldberg][:menu_history] ||= Hash.new
+        session[:goldberg][:menu_history][node.url] = params[:name].to_s
         redirect_to node.url
       else
         logger.error "(error in menu)"

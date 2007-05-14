@@ -22,7 +22,7 @@ module Goldberg
     end
 
     def view
-      @content_page = ContentPage.find_by_name(params[:page_name])
+      @content_page = ContentPage.find_by_name(params[:page_name].join('/'))
       if not @content_page
         if Goldberg.settings
           @content_page = ContentPage.find(Goldberg.settings.not_found_page_id)

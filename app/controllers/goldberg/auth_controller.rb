@@ -3,7 +3,6 @@ module Goldberg
     include GoldbergController
 
     def self.set_user(session, user_id = nil)
-      session[:goldberg] ||= {}
       find_user_id = user_id || session[:goldberg][:user_id]
       Goldberg.user = (if find_user_id then Goldberg::User.find(find_user_id) else nil end)
       
@@ -21,7 +20,14 @@ module Goldberg
         # session[:credentials] = role.cache[:credentials]
         Goldberg.credentials = role.cache[:credentials]
         Goldberg.menu = role.cache[:menu]
-        Goldberg.menu.select(session[:goldberg][:menu_item])
+        session[:goldberg][:menu_history] ||= Hash.new
+        if session[:goldberg][:menu_history].has_key?(session[:goldberg][:path])
+          Goldberg.menu.select(session[:goldberg][:menu_history][session[:goldberg][:path]])
+        else
+          Goldberg.menu.select(session[:goldberg][:menu_item])
+          session[:goldberg][:menu_history][session[:goldberg][:path]] =
+            session[:goldberg][:menu_item]
+        end
         logger.info "Logging in user as role #{role.name}"
       else
         logger.error "Something went seriously wrong with the role"
