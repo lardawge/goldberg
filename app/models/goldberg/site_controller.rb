@@ -38,16 +38,29 @@ module Goldberg
     
     
     def self.load_class_files(path)
-      for file in Dir.glob("#{path}/*") do
-        if file.match /\.rb$/
-          begin
-            load file
-          rescue
-            logger.info "Couldn't load file '#{file}' (already loaded?)"
-          end
+      prereqs = []
+      files = []
+      dirs = []
+      for file in Dir.glob("#{path}/*").sort do
+        if file.match /_controller\.rb$/
+          files << file
+        elsif file.match /\.rb$/
+          prereqs << file
         elsif File.directory? file
-          self.load_class_files(file)
+          dirs << file
         end
+      end
+
+      (prereqs + files).each do |file|
+        begin
+          load file
+        rescue
+          logger.info "Couldn't load file '#{file}' (already loaded?)"
+        end
+      end
+
+      dirs.each do |dir|
+        self.load_class_files(dir)
       end
     end
     
