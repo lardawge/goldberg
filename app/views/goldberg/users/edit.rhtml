@@ -5,5 +5,7 @@
   <%= submit_tag 'Edit' %>
 <% end -%>
 
-<%= link_to 'Show', :action => 'show', :id => @user %> |
+<%= link_to 'Show', :action => (@self_reg ? 'self_show': 'show'), :id => @user %>
+<% if not @self_reg %> |
 <%= link_to 'Back', :action => 'list' %>
+<% end %>
