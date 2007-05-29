@@ -1,15 +1,15 @@
-<h1>Listing roles_permissions</h1>
+<h1>Listing Roles-Permissions</h1>
 
 <table>
   <tr>
-  <% for column in RolesPermission.content_columns %>
+  <% for column in Goldberg::RolesPermission.content_columns %>
     <th><%= column.human_name %></th>
   <% end %>
   </tr>
   
 <% for roles_permission in @roles_permissions %>
   <tr>
-  <% for column in RolesPermission.content_columns %>
+  <% for column in Goldberg::RolesPermission.content_columns %>
     <td><%=h roles_permission.send(column.name) %></td>
   <% end %>
     <td><%= link_to 'Show', :action => 'show', :id => roles_permission %></td>
@@ -18,9 +18,6 @@
   </tr>
 <% end %>
 </table>
-
-<%= link_to 'Previous page', { :page => @roles_permission_pages.current.previous } if @roles_permission_pages.current.previous %>
-<%= link_to 'Next page', { :page => @roles_permission_pages.current.next } if @roles_permission_pages.current.next %> 
 
 <br />
 

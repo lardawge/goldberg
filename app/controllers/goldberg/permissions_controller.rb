@@ -12,7 +12,7 @@ module Goldberg
     end
 
     def list
-      @permission_pages, @permissions = paginate Permission, :per_page => 10
+      @permissions = Permission.find(:all, :order => 'name')
     end
 
     def show

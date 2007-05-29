@@ -12,8 +12,7 @@ module Goldberg
     end
 
     def list
-      @content_pages = ContentPage.find(:all,
-                                        :order => 'name')
+      @content_pages = ContentPage.find(:all, :order => 'name')
     end
 
     def show

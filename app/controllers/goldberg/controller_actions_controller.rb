@@ -14,9 +14,7 @@ module Goldberg
 
 
     def list
-      # @controller_action_pages, @controller_actions = paginate :controller_actions, :per_page => 50, :order => 'site_controller_id, name'
-      @controller_actions = ControllerAction.find(:all,
-                                                  :order => 'name')
+      @controller_actions = ControllerAction.find(:all, :order => 'name')
     end
 
 
