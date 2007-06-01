@@ -37,7 +37,7 @@ module Goldberg
 
     def new_called
       foreign
-      @site_controller = SiteController.new(:name => params[:id])
+      @site_controller = SiteController.new(:name => params[:id].gsub(/\%2F/, '/'))
       render :action => 'new'
     end
 

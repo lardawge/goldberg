@@ -41,7 +41,7 @@
 classes, but they have not yet been set up in Goldberg:</p></div>
 <ul>
 <% for name in @unknown.keys do -%>
-<li> <%= link_to name, :action => 'new_called', :id => name %> </li>
+<li> <%= link_to name, :action => 'new_called', :id => name.gsub(/\//, '%2F') %> </li>
 <% end -%>
 </ul>
 </div>

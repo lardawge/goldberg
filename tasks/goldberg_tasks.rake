@@ -53,31 +53,4 @@ namespace :goldberg do
     Goldberg::Role.rebuild_cache
   end
 
-  desc "Upgrade a legacy Goldberg database to the latest version"
-  task :upgrade => [:install, :flush] do
-    # Prefix all the builtin controllers with 'goldberg/'
-    controllers = Goldberg::SiteController.find :all
-    controllers.each do |c|
-      if c.builtin == 1 and not (c.name =~ /^goldberg/)
-        c.name = 'goldberg/' + c.name
-        c.save
-      end
-    end
-
-    # Convert all the numeric markup styles to the new text format.
-    pages = Goldberg::ContentPage.find :all
-    pages.each do |p|
-      case p.markup_style_id
-      when 1
-        p.markup_style = 'Textile'
-      when 2
-        p.markup_style = 'Markdown'
-      end
-      p.save
-    end
-
-    # Rebuild role caches
-    Goldberg::Role.rebuild_cache
-  end
-
 end
