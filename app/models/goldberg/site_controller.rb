@@ -27,7 +27,8 @@ module Goldberg
       
       ObjectSpace.each_object(Class) do |klass|
         if klass.respond_to? :controller_path
-          if klass.superclass.to_s == ApplicationController.to_s
+          if (klass.to_s != ApplicationController.to_s and
+              klass.ancestors.map{|c|c.to_s}.include?(ApplicationController.to_s))
             classes[klass.controller_path] = klass
           end
         end
