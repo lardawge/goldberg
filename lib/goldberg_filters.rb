@@ -21,13 +21,16 @@ module GoldbergFilters
       session[:goldberg] ||= Hash.new
       session[:goldberg][:path] = request.path
 
+      logger.debug "Setting user..."
       set_user or return false
       
       # Perform some preliminary checks for logged-in users.
       if Goldberg.user
         # Check that the user is not pending registration confirmation.
+        logger.debug "Check user not pending registration confirmation..."
         check_not_pending or return false
         # If the user's session has expired, kick out the user.
+        logger.debug "Check session not expired..."
         check_not_expired or return false
       end
       
@@ -36,6 +39,7 @@ module GoldbergFilters
 
       # If this is a page request check that it exists, and if not
       # redirect to the "unknown" page.
+      logger.debug "Checking that page exists..."
       check_page_exists or return false
       
 
@@ -43,6 +47,7 @@ module GoldbergFilters
       @authorised = false
       
       # Check whether the user is authorised for this page or action.
+      logger.debug "Checking permissions..."
       check_permissions or return false
       
     end  # if Goldberg.settings
@@ -116,8 +121,8 @@ module GoldbergFilters
     if params[:controller] == 'goldberg/content_pages' and
         params[:action] == 'view'
       @is_page_request = true
-      if not Goldberg.credentials.pages.has_key?(params[:page_name].to_s)
-        logger.warn "(Unknown page? #{params[:page_name].to_s})"
+      if not Goldberg.credentials.pages.has_key?(params[:page_name].join '/')
+        logger.warn "(Unknown page? #{params[:page_name].join '/'})"
         respond_to do |format|
           format.html do
             redirect_to Goldberg.settings.not_found_page.url
@@ -138,7 +143,8 @@ module GoldbergFilters
 
   def check_permissions
     if @is_page_request
-      @authorised = Goldberg.credentials.page_authorised?(params[:page_name].to_s)
+      @authorised =
+        Goldberg.credentials.page_authorised?(params[:page_name].join '/')
     else
       @authorised = Goldberg.credentials.action_authorised?(params[:controller],
                                                            params[:action])
@@ -154,7 +160,8 @@ module GoldbergFilters
           end
         end
         format.js do
-          render :status => 400, :text => Goldberg.settings.permission_denied_page.content_html
+          render :status => 400, :text =>
+            Goldberg.settings.permission_denied_page.content_html
         end
         format.xml  do
           render :status => 400, :xml => error_xml(*ERROR_PERMISSION_DENIED)

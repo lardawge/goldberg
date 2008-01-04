@@ -17,7 +17,7 @@ module Goldberg
         @label = item.label
         
         if item.controller_action
-          @site_controller_id = item.controller_action.controller.id
+          @site_controller_id = item.controller_action.site_controller.id
           @controller_action_id = item.controller_action.id
         else
           @site_controller_id = nil
@@ -36,7 +36,7 @@ module Goldberg
               item.controller_action.url_to_use.length > 0
             @url = item.controller_action.url_to_use
           else
-            @url = "/#{item.controller_action.controller.name}/#{item.controller_action.name}"
+            @url = "/#{item.controller_action.site_controller.name}/#{item.controller_action.name}"
           end
         else
           @url = "/#{item.content_page.name}"

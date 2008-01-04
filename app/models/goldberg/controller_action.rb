@@ -2,42 +2,28 @@ module Goldberg
   class ControllerAction < ActiveRecord::Base
     include GoldbergModel
     
+    belongs_to :site_controller
+    belongs_to :permission
+    
     validates_presence_of :name, :site_controller_id
     validates_uniqueness_of :name, :scope => 'site_controller_id'
     
-    attr_accessor :controller, :permission, :url, :allowed, :specific_name
+    attr_accessor :allowed, :specific_name
   
-    def controller
-      @controller ||= SiteController.find(self.site_controller_id)
-    end
-
-    def permission
-      if not @permission
-        if self.permission_id
-          @permission = Permission.find_by_id(self.permission_id)
-        else
-          @permission = Permission.new(:id => nil, 
-                                       :name => "(default -- #{self.controller.permission.name})")
-        end
-      end
-      return @permission
-    end
-
-    def effective_permission_id
-      return self.permission_id || self.controller.permission_id
+    def effective_permission
+      self.permission || self.site_controller.permission
     end
 
     def fullname
       if self.site_controller_id and self.site_controller_id > 0
-        return "#{self.controller.name}: #{self.name}"
+        return "#{self.site_controller.name}: #{self.name}"
       else
         return "#{self.name}"
       end
     end
 
     def url
-      @url ||= "/#{self.controller.name}/#{self.name}"
-      return @url
+      @url ||= "/#{self.site_controller.name}/#{self.name}"
     end
 
     def menu_items
@@ -75,7 +61,7 @@ module Goldberg
             action.allowed = 0
           end
         else  # Controller's permission
-          if perms.has_key?(action.controller.permission_id)
+          if perms.has_key?(action.site_controller.permission_id)
             action.allowed = 1
           else
             action.allowed = 0

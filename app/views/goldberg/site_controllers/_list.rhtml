@@ -10,7 +10,7 @@
           :id => site_controller %></td>
     <td><%= site_controller.permission.name %></td>
   </tr>
-  <% actions = site_controller.actions 
+  <% actions = site_controller.controller_actions 
      if actions.length -%>
     <% for action in actions %>
       <tr class="depth1"><td><div class="menu_title"><%= link_to action.name, :controller => 'controller_actions',

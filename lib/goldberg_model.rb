@@ -1,3 +1,4 @@
+require 'active_record/connection_adapters/postgresql_adapter'
 
 # Set the appropriate table prefix using AR's "set_table_name" 
 

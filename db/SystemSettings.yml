@@ -14,7 +14,6 @@
     id: "1"
     self_reg_role_id: 
     not_found_page_id: "3"
-    default_markup_style_id: "1"
     public_role_id: "1"
     footer_message: A <a href="http://goldberg.rubyforge.org">Goldberg</a> site
     site_name: Goldberg

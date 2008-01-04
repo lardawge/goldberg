@@ -5,27 +5,14 @@ namespace :goldberg do
     GoldbergMigration.dump_bootstrap
   end
 
-  desc "PluginAWeek migrations"
-  task :plugin_migrations => :environment do
-    begin
-      # Try running plugin_migrations from the plugin gem...
-      require 'plugin_migrations'
-      # If plugin_migrations is loaded too late, Goldberg may have
-      # been missed.  If so, add it manually.
-      (Rails.plugins.find do |p| p.name == 'goldberg' end) ||
-        Rails.plugins << Plugin.new("#{RAILS_ROOT}/vendor/plugins/goldberg")
-      # Migrate plugins
-      PluginAWeek::PluginMigrations.migrate
-    rescue MissingSourceFile
-      # ...but if the gem isn't found, plugin_migrations might be
-      # installed directly in vendor/plugins.  Try running the rake
-      # task.
-      Rake::Task['db:migrate:plugins'].invoke
-    end
+  desc "Migrate Goldberg"
+  task :migrate => :environment do
+    Goldberg::Migrator.plugin_name = 'goldberg'
+    Goldberg::Migrator.migrate(ENV['VERSION'])
   end
   
   desc "Load standard Goldberg tables from files in db/"
-  task :load_bootstrap => :plugin_migrations do
+  task :load_bootstrap => :migrate do
     GoldbergMigration.load_bootstrap
   end
 

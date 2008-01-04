@@ -2,12 +2,12 @@ class InitialSetup < ActiveRecord::Migration
   include GoldbergMigration
   def self.up
 
-    create_table "#{prefix}markup_styles", :force => false do |t|
+    create_table "#{prefix}permissions", :force => false do |t|
       t.column "name", :string, :default => "", :null => false
     end
 
 
-    create_table "#{prefix}permissions", :force => false do |t|
+    create_table "#{prefix}markup_styles", :force => false do |t|
       t.column "name", :string, :default => "", :null => false
     end
 
@@ -122,7 +122,7 @@ class InitialSetup < ActiveRecord::Migration
     drop_table "#{prefix}controller_actions"
     drop_table "#{prefix}content_pages"
     drop_table "#{prefix}site_controllers"
-    drop_table "#{prefix}permissions"
     drop_table "#{prefix}markup_styles"
+    drop_table "#{prefix}permissions"
   end
 end

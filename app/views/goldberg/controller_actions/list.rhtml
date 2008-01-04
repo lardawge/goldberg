@@ -9,14 +9,16 @@
   
 <% for controller_action in @controller_actions -%>
   <tr>
-    <td><%= link_to controller_action.controller.name, 
+    <td><%= link_to controller_action.site_controller.name, 
 	    :controller => 'site_controllers',
 	    :action => 'show',
-	    :id => controller_action.controller.id %></td>
+	    :id => controller_action.site_controller.id %></td>
     <td><%= link_to controller_action.name,
 	    :action => 'show',
 	    :id	    => controller_action.id %></td>
-    <td><%= controller_action.permission.name %></td>
+    <td><%= controller_action.permission ?
+    controller_action.permission.name :
+    "(default -- #{controller_action.effective_permission.name})"%></td>
   </tr>
 <% end %>
 </table>

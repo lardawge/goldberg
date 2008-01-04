@@ -1,23 +1,13 @@
 module Goldberg
   class SiteController < ActiveRecord::Base
     include GoldbergModel
+
+    belongs_to :permission
+    has_many :controller_actions, :order => 'name'
     
     validates_presence_of :name, :permission_id
     validates_uniqueness_of :name
-    attr_accessor :permission
 
-    def permission
-      @permission ||= Permission.find_by_id(self.permission_id)
-      return @permission
-    end
-    
-    def actions
-      @actions ||= ControllerAction.find(:all,
-                                         :conditions =>
-                                         "site_controller_id = #{self.id}",
-                                         :order => 'name')
-    end
-    
     def self.classes
       for path in ActionController::Routing.controller_paths do
         self.load_class_files(path)

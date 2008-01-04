@@ -18,7 +18,7 @@
 <tr>
 <td> <%= link_to action.name, :controller => 'controller_actions',
                  :action => 'show', :id => action.id %> </td>
-<td> <%= action.permission.name %> </td> 
+<td> <%= action.permission ? action.permission.name : '(default)' %> </td> 
 <% end -%>
 </table>
 <% else -%>

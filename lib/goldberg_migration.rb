@@ -58,6 +58,15 @@ END
   end
 
   def self.dump_bootstrap
+    # Before dumping a bootstrap configuration, copy the existing
+    # bootstrap to tst/fixtures (unless already exists)
+    fixtures_path = "#{File.dirname(__FILE__)}/../test/fixtures"
+    unless File.exists?(fixtures_path)
+      Dir.mkdir(fixtures_path)
+      Dir["#{File.dirname(__FILE__)}/../db/*.yml"].each do |fixture|
+        FileUtils.cp(fixture, fixtures_path)
+      end
+    end
     self.goldberg_classes.each do |klass|
       self.dump_for_class klass, "#{File.dirname(__FILE__)}/../db"
     end
@@ -73,7 +82,9 @@ END
   
   def self.dump_for_class(klass, dest)
     filename = "#{dest}/#{klass.to_s.sub(/^Goldberg::/, '')}.yml"
-    records = klass.find(:all)
+    records = klass.find(:all).collect do |record|
+      record.attributes
+    end
     File.open(filename, 'w') do |out|  
       YAML.dump(records, out)
     end
@@ -84,11 +95,12 @@ END
     File.open(filename) do |src|
       records = YAML::load(src)
       records.each do |src_rec|
-        record = klass.new src_rec.attributes
-        record.id = src_rec.id
-        record.save or 
-          puts "#{klass.to_s} record #{record} not saved!"
-    end
+        attrs = (src_rec.respond_to?(:attributes) ? src_rec.attributes :
+                 src_rec)
+        record = klass.new(attrs)
+        record.id = attrs['id']
+        record.save!
+      end
     end
     # Reset table sequence if applicable (i.e. PostgreSQL)
     if klass.connection.respond_to?(:reset_pk_sequence!)

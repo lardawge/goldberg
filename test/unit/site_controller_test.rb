@@ -1,11 +1,14 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SiteControllerTest < Test::Unit::TestCase
-  fixtures :site_controllers
+  include Goldberg::TestHelper
 
+  def setup
+    @p = Goldberg::Permission.find :first
+  end
   
   def test_invalid_without_name
-    site_controller = SiteController.new
+    site_controller = Goldberg::SiteController.new
     assert(!site_controller.valid?)
     assert(site_controller.errors.invalid?(:name))
     assert(!site_controller.save)
@@ -18,8 +21,10 @@ class SiteControllerTest < Test::Unit::TestCase
     name_1.freeze
     name_2.freeze
 
-    site_controller_1 = SiteController.new
-    site_controller_2 = SiteController.new
+    site_controller_1 = Goldberg::SiteController.new
+    site_controller_1.permission = @p
+    site_controller_2 = Goldberg::SiteController.new
+    site_controller_2.permission = @p
 
     site_controller_1.name = name_1
     site_controller_2.name = name_2
@@ -40,7 +45,7 @@ class SiteControllerTest < Test::Unit::TestCase
   
     
   def test_classes_finds_direct_controller_derivatives
-    classes = SiteController.classes
+    classes = Goldberg::SiteController.classes
     assert(classes.has_value?(SiteControllerTest::ThereShouldBeNoSuchRealClassNameGoldbergTestController))
   end
 

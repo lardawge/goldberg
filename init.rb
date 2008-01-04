@@ -8,6 +8,6 @@ Dependencies.load_paths += [ controller_path, model_path, helper_path ]
 config.controller_paths << controller_path
 
 # Goldberg's libraries
-Dir["#{File.dirname(__FILE__)}/lib/*.rb"].each do |lib|
+Dir["#{File.dirname(__FILE__)}/lib/**/*.rb"].each do |lib|
   require lib
 end

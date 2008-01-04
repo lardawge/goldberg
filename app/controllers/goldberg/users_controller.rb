@@ -102,7 +102,7 @@ module Goldberg
               render :action => 'create'
             else
               AuthController.set_user(session, @user.id)
-              redirect_to :action => 'self_show'
+              redirect_to @user.get_start_path
             end
           else
             redirect_to :action => 'list'

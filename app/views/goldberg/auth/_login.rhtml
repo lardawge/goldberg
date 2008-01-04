@@ -1,9 +1,8 @@
 <% if Goldberg.user -%>
-<p> User:&nbsp;<%= h(Goldberg.user.name) %>
+<p> User:&nbsp;<%= h(Goldberg.user.name) %></p>
 <% form_tag :controller => 'goldberg/auth', :action => 'logout' do -%>
-  <%= submit_tag "Logout" %>
+  <p><%= submit_tag "Logout" %></p>
 <% end -%>
-</p>
 
 <% else -%>
 <p> <%= link_to "Login", :controller => 'goldberg/auth', 

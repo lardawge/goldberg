@@ -32,11 +32,11 @@ module Goldberg
       actions = ControllerAction.actions_allowed(@permission_ids)
       @actions = Hash.new
       for a in actions do
-        @actions[a.controller.name] ||= Hash.new
+        @actions[a.site_controller.name] ||= Hash.new
         if a.allowed.to_i == 1
-          @actions[a.controller.name][a.name] = true
+          @actions[a.site_controller.name][a.name] = true
         else
-          @actions[a.controller.name][a.name] = false
+          @actions[a.site_controller.name][a.name] = false
         end
       end
 

@@ -1,7 +1,9 @@
 
-<p><b>Controller:</b> <%= @controller_action.controller.name %></p>
+<p><b>Controller:</b> <%= @controller_action.site_controller.name %></p>
 <p><b>Action:</b> <%= @controller_action.name %></p>
-<p><b>Permission:</b> <%= @controller_action.permission.name %></p>
+<p><b>Permission:</b> <%= @controller_action.permission ?
+  @controller_action.permission.name :
+  "(default -- #{@controller_action.effective_permission.name})" %></p>
 
 <hr/>
 <p><%= link_to 'Edit', :action => 'edit', :id => @controller_action %> |

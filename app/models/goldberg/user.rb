@@ -4,18 +4,13 @@ module Goldberg
   class User < ActiveRecord::Base
     include GoldbergModel
 
+    belongs_to :role
+    
     validates_presence_of :name, :role_id
     validates_uniqueness_of :name
     
     attr_accessor :clear_password
     attr_accessor :confirm_password
-    
-    def role
-      if self.role_id
-        @role ||= Role.find(self.role_id)
-      end
-      return @role
-    end
     
     def before_save
       if self.clear_password  # Only update the password if it has been changed

@@ -4,33 +4,37 @@ require "goldberg/menu"
 module Goldberg
   class Role < ActiveRecord::Base
     include GoldbergModel
-    serialize :cache
+
+    has_many :users
+    
     validates_presence_of :name
     validates_uniqueness_of :name
 
-    def Role.rebuild_cache
-      roles = Role.find(:all)
-      
-      for role in roles do
+    serialize :cache
+
+    class << self
+      def Role.rebuild_cache
+        roles = Role.find(:all)
+        
+        for role in roles do
         role.cache = nil ; role.save # we have to do this to clear it
-
-        role.cache = Hash.new
-        role.rebuild_credentials
-        role.rebuild_menu
-        role.save
+          
+          role.cache = Hash.new
+          role.rebuild_credentials
+          role.rebuild_menu
+          role.save
+        end
       end
-    end
-
+    end  # class << self
+      
     def rebuild_credentials
       self.cache[:credentials] = Credentials.new(self.id)
     end
-
 
     def rebuild_menu
       menu = Menu.new(self)
       self.cache[:menu] = menu
     end
-
 
     def get_parents
       parents = Array.new
@@ -57,11 +61,7 @@ module Goldberg
     end
 
     def get_start_path
-      if self.start_path and self.start_path.length > 0
-        self.start_path
-      else
-        Goldberg.settings.get_start_path
-      end
+      self.start_path || Goldberg.settings.get_start_path
     end
     
   end

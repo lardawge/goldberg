@@ -5,7 +5,8 @@ begin require 'redcloth' rescue nil end
 module Goldberg
   class ContentPage < ActiveRecord::Base
     include GoldbergModel
-  
+
+    belongs_to :permission
     validates_presence_of :name, :title, :permission_id
     validates_uniqueness_of :name
     attr_accessor :content_html
@@ -31,50 +32,54 @@ module Goldberg
         end
         return @markup_styles
       end
-    end  # class << self
 
-    def self.find_for_permission(p_ids)
-      if p_ids and p_ids.length > 0
-        return find(:all, 
-                    :conditions => ['permission_id in (?)', p_ids],
-                    :order => 'name')
-      else
-        return Array.new
-      end
-    end
-
-    def self.speller_pages(text)
-      opts =  '-a --encoding=utf-8 -H 2>&1'
-      if RUBY_PLATFORM =~ /mswin/i
-        cmd = '"C:\Program Files\aspell\bin\aspell" ' + opts
-      else
-        cmd = "aspell #{opts}"
-      end
-
-      results = []
-      IO.popen(cmd, 'r+') do |io|
-        io.puts text
-        io.close_write
-        while not io.eof?
-          line = io.readline.chomp
-          if line =~ /^\&/
-            parts = line.split(' ', 5)
-            word = parts[1]
-            suggestions = parts[4].split(', ').collect do |suggestion|
-              "'#{javascript_esc(suggestion)}'"
-            end
-            results << [javascript_esc(word), suggestions.join(', ')] 
-          end
+      def find_for_permission(p_ids)
+        if p_ids.blank?
+          return []
+        else
+          return find(:all, 
+                      :conditions => ['permission_id in (?)', p_ids],
+                      :order => 'name')
         end
       end
-
-      return results
-    end
+      
+      def speller_pages(text)
+        opts =  '-a --encoding=utf-8 -H 2>&1'
+        if RUBY_PLATFORM =~ /mswin/i
+          cmd = '"C:\Program Files\aspell\bin\aspell" ' + opts
+        else
+          cmd = "aspell #{opts}"
+        end
+        
+        results = []
+        IO.popen(cmd, 'r+') do |io|
+          io.puts text
+          io.close_write
+          while not io.eof?
+            line = io.readline.chomp
+            if line =~ /^\&/
+              parts = line.split(' ', 5)
+            word = parts[1]
+              suggestions = parts[4].split(', ').collect do |suggestion|
+                "'#{javascript_esc(suggestion)}'"
+              end
+              results << [javascript_esc(word), suggestions.join(', ')] 
+            end
+          end
+        end
+        
+        return results
+      end
     
+      def javascript_esc(string)
+        string.gsub(/'/, "\\'")
+      end
+    
+    end  # class << self
+
     def url
       return "/#{self.name}"
     end
-    
     
     def content=(new_content)
       write_attribute(:content, new_content)
@@ -86,22 +91,13 @@ module Goldberg
       self.content_cache = self.markup_content
     end
 
-
     def content_html
-      if self.content_cache and self.content_cache.length > 0
-        return self.content_cache
-      else
-        return self.markup_content
-      end
+      self.content_cache ||= self.markup_content
     end
 
     
     protected
 
-    def self.javascript_esc(string)
-      string.gsub(/'/, "\\'")
-    end
-    
     def markup_content
       content_html = nil
       

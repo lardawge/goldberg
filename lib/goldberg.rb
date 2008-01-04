@@ -1,3 +1,7 @@
+# The module 'Goldberg' is the namespace for Goldberg's libraries.  It
+# also provides a number of class methods for convenient access to
+# information about the system from Goldberg's perspective (the
+# current user and the System Settings).
 module Goldberg
 
   class << self

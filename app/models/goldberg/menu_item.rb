@@ -89,7 +89,7 @@ module Goldberg
           item.controller_action = 
             ControllerAction.find(item.controller_action_id)
           if perms
-            if perms.has_key?(item.controller_action.effective_permission_id)
+            if perms.has_key?(item.controller_action.effective_permission.id)
               items << item
             end
           else
