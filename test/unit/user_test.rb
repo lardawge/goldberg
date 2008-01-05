@@ -23,8 +23,10 @@ class UserTest < Test::Unit::TestCase
     
     user_1 = Goldberg::User.new(:name => name_1)
     user_1.role = @role
+    user_1.clear_password = 'fred'
     user_2 = Goldberg::User.new(:name => name_2)
     user_2.role = @role
+    user_2.clear_password = 'fred'
     
     assert(user_1.save)
     assert(user_2.save)
@@ -39,6 +41,7 @@ class UserTest < Test::Unit::TestCase
   def test_password_updated_on_save_when_clear_password_set
     user = Goldberg::User.new(:name => 'name')
     user.role = @role
+    user.clear_password = 'fred'
     assert(user.save)
     
     saved_password = user.password
@@ -67,7 +70,7 @@ class UserTest < Test::Unit::TestCase
     
     user = Goldberg::User.new(:name => 'name')
     user.role = @role
-    assert(user.save)
+    assert(!user.save)
     
     user.clear_password = new_pass
     assert_equal(new_pass, user.clear_password)

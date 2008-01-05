@@ -1,6 +1,6 @@
 module Goldberg
   class Permission < ActiveRecord::Base
-    include GoldbergModel
+    include Goldberg::Model
 
     has_many :content_pages
     has_many :site_controllers

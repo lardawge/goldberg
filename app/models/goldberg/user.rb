@@ -2,22 +2,25 @@ require 'digest/sha1'
 
 module Goldberg
   class User < ActiveRecord::Base
-    include GoldbergModel
+    include Goldberg::Model
 
     belongs_to :role
     
-    validates_presence_of :name, :role_id
+    validates_presence_of :name, :role_id, :password
     validates_uniqueness_of :name
     
     attr_accessor :clear_password
     attr_accessor :confirm_password
-    
-    def before_save
-      if self.clear_password  # Only update the password if it has been changed
+
+    def before_validation
+      if self.clear_password  # Only update password if changed
         self.password_salt = self.object_id.to_s + rand.to_s
         self.password = Digest::SHA1.hexdigest(self.password_salt +
                                                self.clear_password)
       end
+    end
+      
+    def before_save
       if self.self_reg_confirmation_required
         self.set_confirmation_key
       end

@@ -1,5 +1,5 @@
 class SelfRegistration < ActiveRecord::Migration
-  include GoldbergMigration
+  include Goldberg::Migration
   
   def self.up
     # Add fields to SystemSettings to support self registration

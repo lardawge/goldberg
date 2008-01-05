@@ -1,5 +1,5 @@
 class InitialSetup < ActiveRecord::Migration
-  include GoldbergMigration
+  include Goldberg::Migration
   def self.up
 
     create_table "#{prefix}permissions", :force => false do |t|

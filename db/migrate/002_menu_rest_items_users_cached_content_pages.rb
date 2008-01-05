@@ -1,5 +1,5 @@
 class MenuRestItemsUsersCachedContentPages < ActiveRecord::Migration
-  include GoldbergMigration
+  include Goldberg::Migration
 
   def self.up
     # Add URL to use for Actions, to better support REST

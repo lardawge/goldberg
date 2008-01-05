@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 module Goldberg
   class UsersController < ApplicationController
-    include GoldbergController
+    include Goldberg::Controller
 
     # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
     verify :method => :post, :only => [ :destroy, :create, :update ],
@@ -13,25 +13,16 @@ module Goldberg
       @delegate_reg = false
       true  # proceed...
     end
-    before_filter :foreign, :only => [:new,    :delegate_register,
-                                      :create, :delegate_create,
-                                      :edit,   :delegate_edit,
-                                      :update, :delegate_update]
-    before_filter :enable_self_reg, :only => [:self_show, :self_register, :self_create,
-                                              :self_edit, :self_update,
-                                              :confirm_registration,
-                                              :confirm_registration_submit]
-    before_filter :enable_delegate_reg, :only => [:delegate_list, :delegate_show,
-                                                  :delegate_register, :delegate_create,
-                                                  :delegate_edit, :delegate_update,
-                                                  :delegate_destroy]
-    def registration_request
-      key = Digest::SHA1.hexdigest(self.object_id.to_s + rand.to_s)
-      # confirm = UserMailer.create_confirmation_request('Fred Bloggs', 'david@localhost', key)
-      UserMailer.deliver_confirmation_request('Fred Bloggs', 'david@localhost', key)
-
-      render :nothing => true
-    end
+    before_filter :foreign,
+    :only => [:new,    :delegate_register, :create, :delegate_create,
+              :edit,   :delegate_edit,     :update, :delegate_update]
+    before_filter :enable_self_reg,
+    :only => [:self_show, :self_register, :self_create, :self_edit,
+              :self_update, :confirm_registration, :confirm_registration_submit]
+    before_filter :enable_delegate_reg,
+    :only => [:delegate_list, :delegate_show, :delegate_register,
+              :delegate_create, :delegate_edit, :delegate_update,
+              :delegate_destroy]
     
     def list
       if @delegate_reg
@@ -190,7 +181,8 @@ module Goldberg
         else
           if @user.update_attributes(params[:user])
             flash.now[:notice] = 'User was successfully updated.'
-            redirect_to :action => 'show', :id => @user
+            redirect_to :action => (@self_reg ? 'self_show' : 'show'),
+            :id => @user
           else
             render :action => 'edit'
           end

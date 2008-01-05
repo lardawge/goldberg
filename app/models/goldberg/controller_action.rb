@@ -1,6 +1,6 @@
 module Goldberg
   class ControllerAction < ActiveRecord::Base
-    include GoldbergModel
+    include Goldberg::Model
     
     belongs_to :site_controller
     belongs_to :permission

@@ -1,5 +1,5 @@
 class ColumnFixes < ActiveRecord::Migration
-  include GoldbergMigration
+  include Goldberg::Migration
 
   def self.up
     # Remove defaults from many compulsory columns, and drop obsolete

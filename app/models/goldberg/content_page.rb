@@ -4,7 +4,7 @@ begin require 'redcloth' rescue nil end
 
 module Goldberg
   class ContentPage < ActiveRecord::Base
-    include GoldbergModel
+    include Goldberg::Model
 
     belongs_to :permission
     validates_presence_of :name, :title, :permission_id
@@ -79,6 +79,11 @@ module Goldberg
 
     def url
       return "/#{self.name}"
+    end
+
+    def fullname
+      "#{ERB::Util.html_escape(self.name)}" <<
+        (self.title ? " -- #{ERB::Util.html_escape(self.title)}" : '')
     end
     
     def content=(new_content)

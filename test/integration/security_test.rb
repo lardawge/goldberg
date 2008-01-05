@@ -86,9 +86,7 @@ class SecurityTest < ActionController::IntegrationTest
     assert_redirected_to_login
 
     form_login('admin', 'admin')
-    assert_equal({ 'controller' => 'goldberg/users',
-                   'action' => 'list' },
-                 response.redirected_to)
+    assert_match /goldberg\/users\/list/, response.redirected_to
   end
 
   # User should be redirected to the session expired page if they

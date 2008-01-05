@@ -1,6 +1,6 @@
 module Goldberg
   class MenuItem < ActiveRecord::Base
-    include GoldbergModel
+    include Goldberg::Model
     
     validates_presence_of :name, :label
     validates_uniqueness_of :name

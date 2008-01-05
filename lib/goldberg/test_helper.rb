@@ -45,10 +45,10 @@ module Goldberg
         end
         # Load Goldberg's bootstrap data
         puts "Loading fixtures from '#{fixture_path}'..."
-        klasses ||= GoldbergMigration.goldberg_classes
+        klasses ||= Goldberg::Migration.goldberg_classes
         klasses.each do |klass|
           klass.delete_all
-          GoldbergMigration.load_for_class(klass, fixture_path)
+          Goldberg::Migration.load_for_class(klass, fixture_path)
         end
         puts "Done loading fixtures."
       else

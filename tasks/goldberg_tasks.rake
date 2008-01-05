@@ -2,7 +2,7 @@ namespace :goldberg do
 
   desc "Dump standard Goldberg tables to files in db/"
   task :dump_bootstrap => :environment do
-    GoldbergMigration.dump_bootstrap
+    Goldberg::Migration.dump_bootstrap
   end
 
   desc "Migrate Goldberg"
@@ -13,7 +13,7 @@ namespace :goldberg do
   
   desc "Load standard Goldberg tables from files in db/"
   task :load_bootstrap => :migrate do
-    GoldbergMigration.load_bootstrap
+    Goldberg::Migration.load_bootstrap
   end
 
   desc "Install Goldberg"
@@ -22,6 +22,10 @@ namespace :goldberg do
     FileTest.exists?(index) and File.delete(index)
   end
 
+  desc "Upgrade Goldberg"
+  task :upgrade => :migrate do
+  end
+  
   desc "Flush cached data out of sessions and Roles"
   task :flush => :environment do
     puts "Deleting any Rails session files"

@@ -7,6 +7,12 @@ class Goldberg::ContentPagesController; def rescue_action(e) raise e end; end
 
 class ContentPagesControllerTest < Test::Unit::TestCase
   include Goldberg::TestHelper
+
+  def setup
+    @controller = Goldberg::ContentPagesController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+  end
   
   def test_get_public_page
     get :view, :page_name => ['home']

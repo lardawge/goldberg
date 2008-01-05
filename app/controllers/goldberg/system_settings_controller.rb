@@ -1,6 +1,6 @@
 module Goldberg
   class SystemSettingsController < ApplicationController
-    include GoldbergController
+    include Goldberg::Controller
 
     def index
       list

@@ -1,6 +1,6 @@
 module Goldberg
   class AuthController < ApplicationController
-    include GoldbergController
+    include Goldberg::Controller
 
     def self.set_user(session, user_id = nil)
       find_user_id = user_id || session[:goldberg][:user_id]
@@ -53,6 +53,7 @@ module Goldberg
           respond_to do |wants|
             wants.html do
               if session[:pending_request]
+                logger.info "Pending request: #{session[:pending_request].inspect}"
                 pending = session[:pending_request]
                 session[:pending_request] = nil
                 redirect_to pending

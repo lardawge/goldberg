@@ -13,7 +13,7 @@
 <td><%= collection_select 'menu_item', 'controller_action_id',
           @actions, :id, :fullname %></td>
 <td>OR <%= collection_select 'menu_item', 'content_page_id',
-          @pages, :id, :name %></td>
+          @pages, :id, :fullname %></td>
 </tr>
 
 <% if @can_change_parent -%>

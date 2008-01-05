@@ -1,6 +1,6 @@
 module Goldberg
   class RolesPermission < ActiveRecord::Base
-    include GoldbergModel
+    include Goldberg::Model
 
     validates_presence_of :role_id, :permission_id
     
