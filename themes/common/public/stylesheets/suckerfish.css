@@ -1,0 +1,124 @@
+/*** SUCKERFISH ***/
+
+#suckerfish, #suckerfish ul { /* all lists */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+/*  float : left;*/
+}
+	
+/* Width not specified, because top-level horizontal lists
+have a flexible width. */
+#suckerfish li { /* all list items */
+  position : relative;
+/*  float : left;*/
+  line-height : 1.25em;
+/*  margin-bottom : -1px;*/
+}
+
+#suckerfish li ul { /* second-level lists */
+  position : absolute;
+  left: -999em;
+}
+
+#suckerfish li ul ul { /* third-and-above-level lists */
+  left: -999em;
+}
+
+#suckerfish li {
+  background-color : white;
+/*  border-bottom: 1px solid black ;*/
+}
+
+#suckerfish li a {
+  display : block;
+/*  color : black;
+  font-weight : bold;
+  text-decoration : none;*/
+  background-color : white;
+/*  border : 1px solid black;*/
+/*  padding : 0 0.5em;*/
+}
+
+#suckerfish li a:hover {
+  color : white;
+  background-color : black;
+}
+
+#suckerfish li:hover ul ul, #suckerfish li:hover ul ul ul, #suckerfish li.sfhover ul ul, #suckerfish li.sfhover ul ul ul {
+  left: -999em;
+}
+
+#suckerfish li:hover ul, #suckerfish li li:hover ul, #suckerfish li li li:hover ul, #suckerfish li.sfhover ul, #suckerfish li li.sfhover ul, #suckerfish li li li.sfhover ul { /* lists nested under hovered list items */
+  left: auto;
+}
+
+/*** TOPMENU SUCKERFISH ***/
+
+.topmenu #suckerfish, .topmenu #suckerfish ul { /* all lists */
+  float: left ;
+  width: 100% ;
+/*  width : 60em ;*/
+}
+
+.topmenu #suckerfish li {
+  position: relative ;
+  float: left ;
+}
+
+.topmenu #suckerfish li ul { /* second-level lists */
+  width: 11em ;
+}
+
+.topmenu #suckerfish li ul ul { /* third-and-above-level lists */
+  margin: -1em 0 0 11.05em ;
+}
+
+.topmenu #suckerfish ul li a {
+  width: 11em;
+/*  w\idth : 10em;*/
+}
+
+
+/*** LEFTMENU SUCKERFISH ***/
+.leftmenu #suckerfish, .leftmenu #suckerfish ul { /* all lists */
+  width : 11em;
+}
+
+.leftmenu #suckerfish li { /* all list items */
+   width: 11em;
+}
+
+.leftmenu #suckerfish li ul { /* second-level lists */
+  margin-left : 11.05em;
+  margin-top : -1.25em;
+}
+
+.leftmenu #suckerfish li a {
+  width: 11em;
+/*  w\idth : 10em;*/
+}
+
+
+/*** RIGHTMENU SUCKERFISH ***/
+/*.rightmenu {
+  float: right ;
+}
+*/
+.rightmenu #suckerfish, .rightmenu #suckerfish ul { /* all lists */
+  width : 11em;
+}
+
+.rightmenu #suckerfish li { /* all list items */
+  width: 11em;
+}
+
+.rightmenu #suckerfish li ul { /* second-level lists */
+  margin-left : -11em;
+  margin-top : -1.25em;
+}
+
+.rightmenu #suckerfish li a {
+  width: 11em;
+/*  w\idth : 10em;*/
+}

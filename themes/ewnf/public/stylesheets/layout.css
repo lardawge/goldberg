@@ -1,0 +1,223 @@
+
+/*** General Body Elements ***/
+
+body {
+  margin: 0 auto ;
+  padding: 0 ;
+  font: 76% Verdana,Tahoma,Arial,sans-serif ;
+  background-color: #8da0a7 ;
+  background: #8da0a7 url(/goldberg/images/bg.gif) top center repeat-y ;
+}
+
+h1 {
+  color: #666666 ;
+  font-size: 18px ;
+  font-family: Arial, Helvetica, sans-serif ;
+  margin: 6px 0 0 0 ;
+}
+
+h2 {
+  color: #666666 ;
+  font-size: 16px ;
+  font-family: Arial, Helvetica, sans-serif ;
+  margin: 6px 0 0 0 ;
+}
+
+h3 {
+  color: #666666 ;
+  font-size: 14px ;
+  font-family: Arial, Helvetica, sans-serif ;
+  margin: 6px 0 0 0 ;
+}
+
+a {
+  color:#CC6714 ;
+  text-decoration: none ;
+}
+
+a:hover {
+  color:#587ec5 ;
+  background-color: #ffffff ;
+}
+
+#wrap {
+  background: #ffffff ;
+  color: #303030 ;
+  margin: 0 auto ;
+  width: 760px ;
+  padding: 0 ;
+}
+
+#frontphoto {
+  margin: 0px 0px 10px 0px ;
+  border: 0 ;
+}
+
+#title {
+  margin: 0 0px 5px 5px ;
+  border-left: 1px solid #ffffff ;
+  border-right: 1px solid #ffffff ;
+  padding: 0 0px 0 10px ;
+  line-height: 1.6em ;
+  text-align: right ;
+}
+
+#title h1 {
+  font-size: 2.0em ;
+  background: none ;
+  margin: 0 0 0.5em 0 ;
+}
+
+#title p {
+  width: 400px ;
+  float: left ;
+  text-align: center ;
+  color: #a0a0a0 ;
+  background-color: #ffffff ;
+  margin: 0 0 0 0 ;
+  font-size: 0.8em ;
+  line-height: 1.2em ;
+}
+
+#navigation {
+  float: left ;
+  clear: left ;
+  background-color: #ece8e8 ;
+  width: 150px ;
+  margin: 0 0 0 0 ;
+  padding: 5px ;			
+  border: solid 1px #000 ;
+}
+
+#navigation h1 {
+  color: #666666 ;
+  font-size: 16px ;
+  background-color: #ece8e8 ;
+  font-family: Arial, Helvetica, sans-serif ;
+  margin: 0 0 0 0 ;
+}
+
+#suckerfish, #suckerfish ul {
+  margin: 0 ;
+  padding: 0 ;
+  list-style: none ;
+  line-height: 2em ;
+  z-index: 999 ;
+}
+
+#suckerfish li {
+  float: left ;
+  width: 11em ;
+  border-bottom: 1px solid white ;
+}
+
+#suckerfish a {
+  display: block ;
+  width: 11em ;
+}
+
+#suckerfish a.daddy {
+  background-image: url("/goldberg/images/daddy_rightarrow.gif") ;
+  background-position: right center ;
+  background-repeat: no-repeat ;
+}
+
+#suckerfish li ul {
+  position: absolute ;
+  margin: -2em 0 0 11em ;
+  width: 11em ;
+  left: -999em ;
+  background: #ece8e8 ;
+}
+
+#suckerfish li ul li {
+  border-left: 1px solid white ;
+}
+
+#suckerfish li:hover ul ul, #suckerfish li.sfhover ul ul {
+  left: -999em ;
+}
+
+#suckerfish li:hover ul, #suckerfish li li:hover ul, #suckerfish li.sfhover ul, #suckerfish li li.sfhover ul {
+  left: auto ;
+}
+
+#navigation p {
+  padding: 3px ;
+}
+
+
+#navigation .auth {
+  clear: left ;
+}
+
+#navimg {
+  margin: 0 auto 0 auto ;
+  border: dotted 1px #000 ;
+  display:block ;
+}
+
+.main{
+  width: 550px ;
+  margin: auto auto auto auto ;
+  padding: 0.5em 1.0em 0.5em 0.5em ;
+  float: right ;
+}
+
+.main .breadcrumbs { 
+  font-size: 7pt ;
+  padding: 0 0 0 0 ;
+  margin:  0 0 12pt 0 ;
+  background-color: #ece8e8 ;
+}
+
+.title_blue {
+  font-family:Arial, Helvetica, sans-serif ;
+  color:#587ec5 ;
+  background-color: #ffffff ;
+  font-size:12pt ;
+  font-weight:bold ;
+  padding: 0 0 0 0 ;
+  margin: 0 0 -8px 0 ;
+}
+
+.title_red {
+  font-family:Arial, Helvetica, sans-serif ;
+  color:#af0a06 ;
+  background-color: #ffffff ;
+  font-size:12pt ;
+  font-weight:bold ;
+  padding: 0 0 0 0 ;
+  margin: 0 0 -8px 0 ;
+}
+
+.footer {
+  clear:both ;
+  width:750px ;
+  height:20px ;
+  margin:0px 0 0 0 ;
+  padding:4px 0 4px 0 ;
+  font-size:.8em ;
+  text-align:center ;
+}
+
+.footer_text {
+  font-family:Arial, Helvetica, sans-serif ;
+  color:#303030 ;
+  background-color: #ffffff ;
+  font-size:9pt ;
+  font-weight:bold ;
+  padding: 0 0 0 0 ;
+  margin: 0 0 -8px 0 ;
+}
+
+#footer a {
+  color:#CC6714 ;
+  background-color: #ffffff ;
+  text-decoration: none ;
+}
+
+#footer a:hover {
+  color:#587ec5 ;
+  background-color: #ffffff ;
+}

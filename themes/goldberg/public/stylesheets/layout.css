@@ -1,0 +1,321 @@
+/* layout.css
+
+This stylesheet is based on "andreas09.css", modified for Goldberg.
+The original credits follow:
+
+andreas09 v1.0 (Dec 10th 2005) - An open source template by Andreas
+Viklund - http://andreasviklund.com. Free to use for any purpose as
+long as the proper credits are given to the original author.
+*/
+
+body {
+background:#8b8b8b;
+color:#303030;
+font:76% Verdana,Tahoma,Arial,sans-serif;
+margin:0;
+padding:0;
+text-align:center;
+}
+
+a {
+color:#505050;
+font-weight:bold;
+text-decoration:none;
+}
+
+a:hover {
+color:#808080;
+text-decoration:underline;
+}
+
+p {
+line-height:1.5em;
+margin:0 0 15px;
+}
+
+/*** Main container ***/
+
+div.container {
+background:#f0f0f0 url(/goldberg/images/bodybg.jpg) repeat-x;
+color:#303030;
+margin:0;
+min-width:770px;
+padding:0;
+text-align:left;
+width:100%;
+}
+
+/*** Header section ***/
+
+div.header {
+color:#ffffff;
+height:85px;
+margin:0 20px 10px;
+text-align:left;
+}
+
+div.header img.logo_right {  
+float: right ;
+height:85px ;
+margin:0 0 0 0px ;
+border:0 0 0 0px ;
+}
+
+div.header p {
+line-height:1.5em;
+margin:0 0 0px;
+}
+
+div.header p.right_text { 
+text-align: right ;
+}
+
+div.header h1, div.header h2 {
+font-weight:400;
+letter-spacing:-2px;
+margin:0;
+padding:0;
+}
+
+div.header h1 {
+font-size:2.4em;
+padding-top:15px;
+}
+
+div.header h2 {
+font-size:1.6em;
+}
+
+/*** Horizontal menu ***/
+
+div.mainmenu {
+float:left;
+margin-bottom:25px;
+}
+
+div.mainmenu ul {
+font-size:16px;
+margin:0;
+padding:0;
+}
+
+div.mainmenu li {
+float:left;
+/*height:20px;*/
+list-style:none;
+margin:0;
+padding:0;
+}
+
+div.mainmenu a {
+border-right:1px solid #b0b0b0;
+color:#606060;
+display:block;
+font-size:0.7em;
+padding:5px 7px 5px;
+/* text-transform:uppercase; */
+}
+
+div.mainmenu a:hover {
+background:#f0f0f0 url(/goldberg/images/menuhover.jpg) top left repeat-x;
+color:#505050;
+text-decoration:none;
+}
+
+div.mainmenu li.selected a {
+background:#f0f0f0 url(/goldberg/images/menuhover.jpg) top left repeat-x;
+color:#505050;
+text-decoration:none;
+}
+
+/*** Content wrap ***/
+
+div.wrap {
+clear:both;
+font-size:0.9em;
+padding:0;
+}
+
+/*** Sidebars ***/
+
+div.leftside,div.rightside {
+margin:0;
+padding:0 10px 10px;
+width:165px;
+}
+
+div.leftside {
+float:left;
+margin-right:10px;
+}
+
+div.rightside {
+float:right;
+margin-left:10px;
+}
+
+div.leftside h1, div.rightside h1 {
+color:#505050;
+font-size:1.6em;
+font-weight:bold;
+letter-spacing:-1px;
+margin:0 0 12px;
+}
+
+div.leftside h2, div.rightside h2 {
+font-size:1.1em;
+margin:0 0 20px;
+}
+
+div.leftside p, div.rightside p {
+font-size:0.9em;
+line-height:1.4em;
+margin:0 0 16px 10px;
+}
+
+.linklist {
+list-style:none;
+margin:0 0 16px 10px;
+padding:0;
+}
+
+.linklist li {margin-bottom:0.7em;}
+
+/*** Sidebar menu ***/
+
+ul.sidemenu {
+list-style-type:none;
+margin-left: 0px;
+padding-left: 0px;
+}
+
+ul.sidemenu li a {
+background:#e8e9ea;
+border:1px solid #b0b0b0;
+color:#606060;
+display:block;
+margin-top:8px;
+padding:5px 4px 4px 10px;
+position:relative;
+/*text-transform:uppercase;*/
+width:150px;
+}
+
+ul.sidemenu ul.sidemenu li a {
+font-size:0.8em;
+letter-spacing:1px;
+margin:3px 0 2px 20px;
+padding:4px 2px 2px 8px;
+width:134px;
+}
+
+ul.sidemenu a:hover, ul.sidemenu > li.selected > a {
+background:#f8f9fa;
+border:1px solid #909090;
+color:#303030;
+text-decoration:none;
+}
+
+
+/*** Content ***/
+
+.content {
+background-color:#fafcff;
+border:1px solid #909090;
+color:#2a2a2a;
+padding:15px 20px 5px;
+}
+
+.content {margin:0 200px;}
+
+div.content h1, div.content h2 {
+background-color:inherit;
+color:#606060;
+font-size:1.8em;
+font-weight:bold;
+letter-spacing:-1px;
+margin:0 0 15px;
+padding:0;
+}
+
+div.content h2 {
+font-size:1.6em;
+margin-bottom:10px;
+}
+
+div.content img {
+border:1px solid #b0b0b0;
+}
+
+/*** Footer ***/
+
+div.footer {
+background:#8b8b8b url(/goldberg/images/footerbg.jpg) top left repeat-x;
+clear:both;
+color:#d0d0d0;
+font-size:0.9em;
+font-weight:bold;
+margin:0;
+padding:20px 0;
+text-align:center;
+width:100%;
+}
+
+div.footer a {
+color:#d0d0d0;
+font-weight:bold;
+}
+
+/*** Various classes ***/
+
+.thumbnail {
+background:#fafbfc;
+border:1px solid #b0b0b0;
+margin:0 0 10px 10px;
+padding:5px;
+}
+
+
+.searchform {margin:0;}
+
+.searchbox {
+background:#f0f0f0;
+border:1px solid #b0b0b0;
+margin:0 4px 0 0;
+width:100px;
+}
+
+input[type="submit"] {
+background:#f0f0f0;
+border:1px solid #b0b0b0;
+}
+
+input[type="submit"]:hover {
+background:#f8f9fa;
+border:1px solid #909090;
+color:#303030;
+}
+
+
+.clearingdiv {
+clear:both;
+height:30px;
+width:1px;
+}
+
+.hide {display:none;}
+
+/*** Text format ***/
+
+.intro {
+font-size:1.1em;
+font-weight:bold;
+letter-spacing:-1px;
+}
+
+.small {font-size:0.8em;}
+.large {font-size:1.4em;}
+.center {text-align:center;}
+.right {text-align:right;}
+
+/*** End of file ***/

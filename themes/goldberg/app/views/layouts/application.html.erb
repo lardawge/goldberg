@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+<title><%= goldberg_title %></title>
+
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+
+<link rel="stylesheet" href="/goldberg/stylesheets/goldberg.css" 
+  type="text/css" media="screen" />
+<link rel="stylesheet" href="/goldberg/stylesheets/layout.css" 
+  type="text/css" media="screen" />
+
+<%= javascript_include_tag :defaults %>
+
+<% if defined?(RAILS_ROOT)
+     if File.exists?("#{RAILS_ROOT}/public/stylesheets/ajax_scaffold.css") -%>
+<%= stylesheet_link_tag 'ajax_scaffold', :media => 'all' %>
+  <% end 
+     if File.exists?("#{RAILS_ROOT}/public/javascripts/ajax_scaffold.js") -%>
+<%= javascript_include_tag 'rico_corner', 'ajax_scaffold' %>
+  <% end
+  end -%>
+
+
+</head>
+
+<body>
+<div class="container">
+
+<div class="header">
+
+<img class="logo_right" src="/goldberg/images/logo_right.jpg"/>
+<h1><%= Goldberg.settings.site_name %></h1>
+<p><%= Goldberg.settings.site_subtitle %></p>
+
+<!-- Could put something here like some top links -->
+<!--p class="right_text"></p-->
+</div>  <!-- class="header" -->
+
+<!-- Horizontal menu, along top -->
+<div class="mainmenu">
+  <%= goldberg_main_menu %>
+</div>  <!-- class="mainmenu" -->
+ 
+<div class="wrap">
+
+<!-- Left-hand side.  Vertical submenus, plus other stuff -->
+<div class="leftside">
+  <%= goldberg_left_menu %>
+<!-- Put other LHS stuff here -->
+</div>  <!-- class="leftside" -->
+
+
+<!-- Right-hand side.  Login/status, plus other stuff -->
+<div class="rightside">
+  <%= goldberg_login %>
+
+<!-- Put other RHS stuff here -->
+</div>  <!-- class="rightside" -->
+
+
+<div class="content">
+<% if flash[:note] -%>
+<div class="flash_note"><%= flash[:note] %></div>
+<% elsif flash[:error] -%>
+<div class="flash_error"><h1>Error!</h1><%= flash[:error] %></div>
+<% end -%>
+<%= yield %>
+</div>  <!-- class="content" -->
+
+<div class="clearingdiv">&nbsp;</div>
+</div>  <!-- class="wrap" -->
+
+</div>  <!-- class="container" -->
+
+<div class="footer"><%= Goldberg.settings.footer_message %></div>
+</body>
+</html>

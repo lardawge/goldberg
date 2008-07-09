@@ -1,0 +1,379 @@
+/*******************************************************
+TITLE: Spoiled Brat V1.0
+DATE: 20060526
+AUTHOR: Rayk Web Design / The CSS Tinderbox - http://www.csstinderbox.com
+
+TABLE OF CONTENTS:
+1. General
+2. Header
+3. Main Column
+4. Right Column
+5. Footer
+6. Hacks & Work-Arounds
+
+*******************************************************/
+	
+/* *****************
+ 1. General 
+********************/
+
+body {
+  margin:0 ;
+  padding:0 ;
+  font-family:Georgia, "Times New Roman", Times, serif ;
+  font-size:1em ;
+  background-color:#ffffff ;
+  background-image:url(/goldberg/images/body-bg.jpg) ;
+  background-repeat:repeat ;
+}
+
+a {
+  color:#9F7E49 ;
+  text-decoration:underline ;
+}
+
+a:hover {
+  color:#999999 ;
+  text-decoration:none ;
+}
+
+ul li {
+  list-style-type:disc ;
+}
+
+ul li ul li {
+  list-style-type:circle ;
+  color:#A8908E ;
+  font-style:italic ;
+}
+
+.hr {
+  margin:1.5em 15em 1.5em 1em ;
+  height:40px ;
+  background-color:#ffffff ;
+  background-image:url(/goldberg/images/hr-bg.jpg) ;
+  background-position:center ;
+  background-repeat:no-repeat ;
+}
+
+.hr hr {
+  display: none ;
+}
+
+blockquote {
+  margin:1em 15em 1em 1em ;
+  padding:.5em .5em 2em 4em ;
+  font-size:.9em ;
+  background-color:#F8E8F2 ;
+  background-image:url('/goldberg/images/blockquote-bg.gif') ;
+  background-position:0 0 ;
+  background-repeat:no-repeat ;
+  border-top:1px solid #DBA8C6 ;
+  border-bottom:1px solid #DBA8C6 ;
+}
+
+blockquote p {
+  margin:.2em ;
+  color:#A57E95 ;
+}
+
+/* **********************
+ 2. Header 
+************************* */
+
+#header {
+  margin:3em 3.6em 0 3.55em ;
+  padding:0 0 1em 1em ;
+  height:13em ;
+  background-color:#A57E95 ;
+  background-image:url('/goldberg/images/header-bg.jpg') ;
+  background-position:0 0 ;
+  background-repeat:repeat-x ;
+  border-top:1px solid #ffffff ;
+  border-left:1px solid #ffffff ;
+  border-right:1px solid #ffffff ;
+}
+
+#header img { 
+  margin:0 0 0 0 ;
+  padding:0 ;
+  border:none ;
+}
+
+#header h1 { 
+  margin:-3em 0 0 6.5em ; 
+  padding:0 ;
+  font-size:1.6em ;
+  color:#ffffff ;
+  font-weight:100 ;
+  letter-spacing:.1em ;
+}
+
+#header h3 { 
+  margin:0 0 0 11.5em ; 
+  padding:0 ;
+  font-size:.9em ;
+}
+
+#header a {
+  text-decoration:none ;
+}
+
+/* **********************
+ 3. Main Column 
+************************* */
+
+.centerColumn {
+  right:4em ;
+  margin-top:0 ;
+  margin-left: 4em ;
+  margin-right:4em ;
+  voice-family: "\"}\"" ;
+  voice-family: inherit ;
+  margin-left:4em ;
+  margin-right:4em ;
+  padding:1em .5em 2em .5em ;
+  font-size:.9em ;
+  color:#544847 ;
+  background-color:#ffffff ;
+  background-image:url(/goldberg/images/centerColumn-bg.jpg) ;
+  background-position:top ;
+  background-repeat:repeat-x ;
+}
+
+html>body .centerColumn {
+  margin-left:4em ;
+  margin-right:4em ;
+}
+
+
+.centerColumn h1 { 
+  margin:0 0 -.5em 0 ; 
+  padding: 1em 0 .5em 0em ;
+  font-size:1.5em ;
+  color:#C48DAD ;
+  letter-spacing:.1em ;
+}
+
+.centerColumn h2 { 
+  margin:0 0 -1em 0 ; 
+  padding:.1em 0 .5em 2em ;
+  font-size:1.1em ;
+  color:#C48DAD ;
+  letter-spacing:.1em ;
+  background-image:url(/goldberg/images/h2-bg.gif) ;
+  background-position:0 0 ;
+  background-repeat:no-repeat ;
+}
+
+.centerColumn h3 { 
+  margin:.9em 0 -.5em 0 ; 
+  padding-left:2.7em ;
+  font-size:.9em ;
+  color:#AB9D59 ;
+  font-weight:100 ;
+  letter-spacing:.1em ;
+}
+
+.centerColumn p{
+  margin-left:2em ;
+}
+
+.centerColumn .breadcrumbs { 
+  font-size: 8pt ;
+  background-color:#FBEBF5 ; 
+}
+
+/* **********************
+ 4. Right Column 
+************************* */
+
+#rightColumn {
+  float:right ;
+  margin:0 0 0 1em ;
+  padding:.7em .7em .7em 1em ;
+  width:13em ;
+  font-size:.8em ;
+  color:#A8908E ;
+  background-color:#ffffff ;
+}
+
+#rightColumn p {
+  margin:.5em 0 0 0 ;
+  padding-bottom:.75em ;
+}
+
+#rightColumn h3 { 
+  margin:.9em 0 -.5em 0 ;
+  padding:0 0 .4em 2.7em ;
+  display:block ;
+  font-size:1em ;
+  color:#B47B9C ;
+  font-weight:100 ;
+  letter-spacing:.1em ;
+  background-image:url('/goldberg/images/h3-bg.gif') ;
+  background-position:0 0 ;
+  background-repeat:no-repeat ;
+}
+
+div.rightmenu {
+  margin-top: 12px ;
+}
+
+#suckerfish * {
+  margin: 0 ;
+  padding: 0 ;
+}
+
+#suckerfish, #suckerfish ul {
+  margin: 0 ;
+  padding: 0 ;
+  list-style: none ;
+  line-height: 2em ;
+  z-index: 999 ;
+}
+
+#suckerfish li {
+  float: left ;
+  width: 11em ;
+  list-style: none ;
+  border-bottom: 1px solid white ;
+}
+
+#suckerfish a {
+  display: block ;
+  /* Leave room for left daddy-arrow:*/
+  padding-left: .75em ;
+  width: 10.25em ;
+  color:#D464A6 ;
+  text-decoration:none ;
+  background-color:#FBEBF5 ; 
+}
+
+#suckerfish a:hover {
+  text-decoration: underline ;
+}
+
+#suckerfish a.daddy {
+  background-image: url('/goldberg/images/daddy_leftarrow.gif') ;
+  background-position: left center ;
+  background-repeat: no-repeat ;
+}
+
+#suckerfish li ul {
+  position: absolute ;
+  margin: -2em 0 0 -11.1em ;
+  width: 11em ;
+  left: -999em ;
+  background: #ece8e8 ;
+}
+
+#suckerfish li ul li {
+  border-right: 1px solid white ;
+}
+
+#suckerfish li:hover ul ul, #suckerfish li.sfhover ul ul {
+  left: -999em ;
+}
+
+#suckerfish li:hover ul, #suckerfish li li:hover ul, #suckerfish li.sfhover ul, #suckerfish li li.sfhover ul {
+  left: auto ;
+}
+
+#rightColumn .auth { 
+  margin-top: 2em ;
+}
+
+#rightColumn .auth h1 {
+  display: none ;
+}
+
+#tags {
+  float:left ;
+  margin:.5em 0 .5em 0 ;
+  width:10em ;
+  text-align:left ;
+  border:none ;
+}
+
+#tags img {
+  border:none ;
+}
+
+#tags p {
+  margin:0 0 -.25em 1em ;
+}
+
+#tags a {
+  font-size:.8em ;
+  color:#9F7E49 ;
+}
+
+/* **********************
+ 5. Footer 
+************************* */
+
+#footer {
+  right:5.2em ;
+  margin-top:0 ;
+  margin-bottom:2em ;
+  margin-left: 5.2em ;
+  margin-right:5.2em ;
+  voice-family: "\"}\"" ;
+  voice-family: inherit ;
+  margin-left:5.2em ;
+  margin-right:5.2em ;
+  padding:2em .5em 2em .5em ;
+  font-size:.7em ;
+  color:#907396 ;
+  text-align:center ;
+  background-color:#ffffff ;
+  background-image:url(/goldberg/images/header-bg.jpg) ;
+  background-position:top ;
+  background-repeat:repeat-x ;
+}
+
+html>body #footer {
+  margin-left:5.2em ;
+  margin-right:5.2em ;
+}
+
+#footer a {
+  color:#ffffff ;
+  text-decoration:underline ;
+}
+
+#footer a:hover {
+  color:#000000 ;
+  text-decoration:none ;
+}
+
+/* **********************
+ 6. Hacks & Work-Arounds 
+************************* */
+
+/* Source: http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+  content: "." ; 
+  display: block ; 
+  height: 0 ; 
+  clear: both ; 
+  visibility: hidden ;
+}
+
+.clearfix {
+  display: inline-table ;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+  height: 1% ;
+}
+.clearfix {
+  display: block ;
+}
+/* End hide from IE-mac */
+
+div.clearing {
+  clear: both ;
+}
