@@ -4,7 +4,7 @@ module Goldberg
   class User < ActiveRecord::Base
     include Goldberg::Model
 
-    belongs_to :role
+    belongs_to :role, :class_name => 'Goldberg::Role'
     
     validates_presence_of :name, :role_id, :password
     validates_uniqueness_of :name

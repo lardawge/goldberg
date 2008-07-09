@@ -14,14 +14,14 @@ module Goldberg
   module SchemaStatements
     def self.included(base) #:nodoc:
       base.class_eval do
-        alias_method_chain :initialize_schema_information, :plugins
+        alias_method_chain :initialize_schema_migrations_table, :plugins
         alias_method_chain :dump_schema_information, :plugins
       end
     end
     
     # Creates the plugin schema info table
-    def initialize_schema_information_with_plugins
-      initialize_schema_information_without_plugins
+    def initialize_schema_migrations_table_with_plugins
+      initialize_schema_migrations_table_without_plugins
       
       begin
         execute <<-EOS

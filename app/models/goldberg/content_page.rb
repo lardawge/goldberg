@@ -6,7 +6,7 @@ module Goldberg
   class ContentPage < ActiveRecord::Base
     include Goldberg::Model
 
-    belongs_to :permission
+    belongs_to :permission, :class_name => 'Goldberg::Permission'
     validates_presence_of :name, :title, :permission_id
     validates_uniqueness_of :name
     attr_accessor :content_html

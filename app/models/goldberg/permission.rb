@@ -2,9 +2,9 @@ module Goldberg
   class Permission < ActiveRecord::Base
     include Goldberg::Model
 
-    has_many :content_pages
-    has_many :site_controllers
-    has_many :controller_actions
+    has_many :content_pages, :class_name => 'Goldberg::ContentPage'
+    has_many :site_controllers, :class_name => 'Goldberg::SiteController'
+    has_many :controller_actions, :class_name => 'Goldberg::ControllerAction'
     
     validates_presence_of :name
     validates_uniqueness_of :name

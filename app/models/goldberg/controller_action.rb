@@ -2,8 +2,8 @@ module Goldberg
   class ControllerAction < ActiveRecord::Base
     include Goldberg::Model
     
-    belongs_to :site_controller
-    belongs_to :permission
+    belongs_to :site_controller, :class_name => 'Goldberg::SiteController'
+    belongs_to :permission, :class_name => 'Goldberg::Permission'
     
     validates_presence_of :name, :site_controller_id
     validates_uniqueness_of :name, :scope => 'site_controller_id'

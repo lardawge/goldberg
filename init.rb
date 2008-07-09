@@ -1,3 +1,5 @@
+require 'rails_generator'
+
 # Set load paths to include the plugin /app directory
 controller_path = "#{File.dirname(__FILE__)}/app/controllers"
 model_path      = "#{File.dirname(__FILE__)}/app/models"

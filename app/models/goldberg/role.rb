@@ -5,7 +5,7 @@ module Goldberg
   class Role < ActiveRecord::Base
     include Goldberg::Model
 
-    has_many :users
+    has_many :users, :class_name => 'Goldberg::User'
     
     validates_presence_of :name
     validates_uniqueness_of :name

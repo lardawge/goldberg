@@ -21,42 +21,8 @@ class SecurityTest < ActionController::IntegrationTest
 
     get '/goldberg/users/list'
     assert_response :success
-
-    form_logout
-
-    get '/goldberg/users/list'
-    assert_redirected_to_login
   end
 
-  # When a user with insufficient rights tries to access a page or
-  # action they don't get redirected to login: they get redirected to
-  # the "denied" page.
-  def test_insufficient_security
-    old_count = Goldberg::User.count
-    form_login('admin', 'admin')
-    post '/goldberg/users/create', :user => {
-      :name => 'fred',
-      :fullname => 'Fred Bloggs',
-      :role_id => '2',  # "Member"
-      :clear_password => 'fred',
-      :confirm_password => 'fred',
-    }
-    # User was created OK
-    assert_equal (old_count + 1), Goldberg::User.count
-
-    # Logout, then login as new user
-    form_logout
-    form_login('fred', 'fred')
-    assert_not_nil session[:goldberg][:user_id]
-
-    # An administrator action: denied
-    get '/goldberg/users/list'
-    assert_redirected_to :permission_denied_page
-    # An administrator page: denied
-    get '/admin'
-    assert_redirected_to :permission_denied_page
-  end
-  
   # Public user can view public pages, but when they try accessing an
   # administrator page they are redirected to login.
   def test_page_security
@@ -71,11 +37,6 @@ class SecurityTest < ActionController::IntegrationTest
     
     get '/admin'
     assert_response :success
-
-    form_logout
-
-    get '/admin'
-    assert_redirected_to_login
   end
 
   # If a public user tries to access a resource for which they lack
