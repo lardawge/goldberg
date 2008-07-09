@@ -1,4 +1,6 @@
-require 'active_record/connection_adapters/postgresql_adapter'
+if ActiveRecord::ConnectionAdapters::const_defined?(:PostgreSQLAdapter)
+  require 'active_record/connection_adapters/postgresql_adapter'
+end
 
 # Set the appropriate table prefix using AR's "set_table_name" 
 
@@ -14,7 +16,8 @@ module Goldberg
         
         def self.prefix
           if not @prefix
-            if self.connection.class.to_s == 
+            if ActiveRecord::ConnectionAdapters::const_defined?(:PostgreSQLAdapter) &&
+                self.connection.class.to_s == 
                 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
               @prefix = 'goldberg.'
             else
@@ -38,8 +41,9 @@ module Goldberg
   module PostgreSQL
     def self.included(base)
       base.class_eval do
-        alias_method :pk_and_sequence_for_without_goldberg, :pk_and_sequence_for
-        alias_method :pk_and_sequence_for, :pk_and_sequence_for_with_goldberg
+        alias_method_chain :pk_and_sequence_for, :goldberg
+        alias_method_chain :quote_column_name, :goldberg
+        alias_method_chain :quote_table_name, :goldberg
       end
     end
 
@@ -101,10 +105,23 @@ module Goldberg
     rescue
       nil
     end
+
+    def quote_column_name_with_goldberg(name)
+      prefix = 'goldberg.'
+      name.respond_to?('[]'.to_sym) &&
+        name[0 ... prefix.length] == prefix ? name :
+        quote_column_name_without_goldberg(name)
+    end
+    
+    def quote_table_name_with_goldberg(name)
+      quote_column_name_with_goldberg(name)
+    end
     
   end
 end
 
-ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.class_eval do
-  include Goldberg::PostgreSQL
+if ActiveRecord::ConnectionAdapters::const_defined?(:PostgreSQLAdapter)
+  ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.class_eval do
+    include Goldberg::PostgreSQL
+  end
 end
