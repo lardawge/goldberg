@@ -81,23 +81,12 @@ module Goldberg
       end
     end  # def login
     
-    def logout
+    def logout 
       if request.post?
-        self.class.logout(session)
-      end
+        reset_session
+      end 
       flash[:notice] = 'You are now logged out.'
-      redirect_to Goldberg.settings.public_role.get_start_path
-    end
-
-    
-    protected
-
-    def self.logout(session)
-      request.reset_session
-    end
-
-    def self.clear_session(session)
-      session[:goldberg] = {}
+      redirect_to Goldberg.settings.public_role.get_start_path 
     end
 
   end
