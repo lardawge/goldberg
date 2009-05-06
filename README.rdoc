@@ -1,0 +1,36 @@
+= Goldberg
+
+This version fixes issues for Rails 2.3.2 compatibility as well as minor bug fixes and enhancements.
+
+Prerequisites
+Rails >= 2.2 (gem install rails)
+RedCloth (gem install RedCloth)
+
+
+== Usage
+
+This is an example of how you would set up a Rails website that you plan to manage with git, with Goldberg as a submodule.
+
+	$ rails mysite
+	$ cd mysite
+	$ git init
+	$ git submodule add git://github.com/lardawge/goldberg.git vendor/plugins/goldberg
+
+We’re skipping some steps, like appropriate .gitignore entries for your log/ directory and others—that’s up to you.
+
+Set up your config/database.yml appropriately then continue…
+
+	$ rake goldberg:install
+	$ rake goldberg:theme[snooker]
+
+The first command above will bootstrap your Goldberg environment, including migrating and populating your database with a default setup.
+
+The second runs a little bit of generator code to put Goldberg’s assets (images, stylesheets, javascripts) into public/ and to put a default application.html.erb into your site. Available themes include “ewnf”, “goldberg”, “snooker” and “spoiled_brat”.
+
+And that’s it: now you should be ready to run script/server and use your site.
+
+== Contact
+
+The main point of contact for the Goldberg project is the discussion group:
+
+* <b>Google Group:</b> http://groups.google.com/group/rubyonrails-goldberg

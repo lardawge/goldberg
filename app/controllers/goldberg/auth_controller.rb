@@ -40,8 +40,12 @@ module Goldberg
     
     def login
       if request.get?
-        self.class.clear_session(session)
-        render :action => 'login'
+        if Goldberg.user #if user goes to login url or hits back button and is already logged in
+          redirect_to Goldberg.user.get_start_path
+        else
+          reset_session #double check there isn't a stale session
+          render :action => 'login'
+       end
       else
         user = User.find_by_name(params[:login][:name])
         
