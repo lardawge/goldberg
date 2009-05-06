@@ -109,16 +109,12 @@ module Goldberg
     def class_actions(classname)
       classes = SiteController.classes
       actions = Hash.new()
-      
+
       if classes.has_key? classname
         controller = classes[classname]
 
-        for method in controller.public_instance_methods do
+        for method in controller.public_instance_methods(false) do
           actions[method] = true
-        end
-
-        for hidden in controller.hidden_actions do
-          actions.delete hidden
         end
       end
 
