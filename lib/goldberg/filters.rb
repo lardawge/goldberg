@@ -1,9 +1,9 @@
-require 'goldberg/system_settings'
-require 'goldberg/credentials'
-require 'goldberg/menu'
-require 'goldberg/user'
-require 'goldberg/content_page'
-require 'goldberg/role'
+require_dependency 'goldberg/system_settings'
+require_dependency 'goldberg/credentials'
+require_dependency 'goldberg/menu'
+require_dependency 'goldberg/user'
+require_dependency 'goldberg/content_page'
+require_dependency 'goldberg/role'
 
 module Goldberg
   module Filters

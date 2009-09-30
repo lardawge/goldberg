@@ -1,5 +1,5 @@
-require "goldberg/credentials"
-require "goldberg/menu"
+require_dependency "goldberg/credentials"
+require_dependency "goldberg/menu"
 
 module Goldberg
   class Role < ActiveRecord::Base
