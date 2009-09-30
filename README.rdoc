@@ -1,6 +1,10 @@
 = Goldberg
 
-This version fixes issues for Rails 2.3.2 compatibility as well as minor bug fixes and enhancements.
+Updated 9/30/09
+
+Should run on rails 2.3.4 (haven't had a problem).
+Password are now encrypted using Sha512. Credit to authlogic (using the same algorithm). Older Sha1 passwords will be automagically updated on next login. Take a look at lib/goldberg/crypto_pass_sha512.rb vs lib/goldberg/crypto_pass_sha1.rb if your curious about the diff. 
+
 
 Prerequisites
 Rails >= 2.2 (gem install rails)
