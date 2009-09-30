@@ -1,4 +1,4 @@
-require 'digest/sha1'
+require 'active_support/secure_random'
 
 module Goldberg
   class User < ActiveRecord::Base
@@ -15,8 +15,8 @@ module Goldberg
     def before_validation
       if self.clear_password  # Only update password if changed
         self.password_salt = self.object_id.to_s + rand.to_s
-        self.password = Digest::SHA1.hexdigest(self.password_salt +
-                                               self.clear_password)
+        self.password = Goldberg::CryptoPassSha512.encrypt(self.password_salt +
+                                                  self.clear_password)
       end
     end
       
@@ -31,20 +31,27 @@ module Goldberg
     end
     
     def check_password(clear_password)
-      self.password == Digest::SHA1.hexdigest(self.password_salt.to_s +
-                                              clear_password)
+      token = self.password_salt.to_s + clear_password
+      if Goldberg::CryptoPassSha512.matches?(self.password, token)
+        return true
+      elsif Goldberg::CryptoPassSha1.matches?(self.password, token)
+        self.password = Goldberg::CryptoPassSha512.encrypt(token)
+        self.save
+        return true
+      else
+        return false
+      end
     end
 
     def set_confirmation_key
-      self.confirmation_key = Digest::SHA1.hexdigest(self.object_id.to_s +
-                                                       rand.to_s)
+      self.confirmation_key = SecureRandom.hex(24)
     end
 
     def email_valid?
       self.email &&
         self.email.length > 0 &&
         # http://regexlib.com/DisplayPatterns.aspx
-        self.email =~ /\A.+@[^\.].*\.[a-z]{2,}\z/
+        self.email =~ /\A[A-Z0-9_\.%\+\-]+@(?:[A-Z0-9\-]+\.)+(?:[A-Z]{2,4}|museum|travel)\z/i
     end
 
     def get_start_path
